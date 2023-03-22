@@ -1,0 +1,16 @@
+Virtual Enviroment:
+    python -m venv [nameEnviroment]
+Django install:
+    python -m pip install django
+Create Project:
+    django-admin startproject [nameProject]
+Create empty database:
+    python manage.py migrate
+Run web server:
+    python manage.py runserver [PortNumber]
+Create new app:
+    python manage.py startapp [AppName]
+Create Migration to update database:
+    python manage.py makemigrations
+Run Migration:
+    python manage.py migrate (--database=[nameDatabase in setting.py])

@@ -1,0 +1,68 @@
+{% load static %}
+<div class="part-form selCom">
+    <lable for="name">
+      Product name: 
+    </lable>
+    <div class="input-field">
+      <input type="text" style="border: none;" class="selCom" name="name" value="{{product.name}}">
+    </div>
+</div>
+<div class="part-form selCom">
+    <lable for="category">
+      Category name: 
+    </lable>
+    <div class="input-field">
+      <input type="text" style="border: none;" class="selCom" name="category" value="{{product.cate_id.name}}">
+    </div>
+</div>
+<div class="part-form selCom">
+    <lable for="name">
+      Description: 
+    </lable>
+    <div class="input-field">
+      <input type="text" style="border: none;" class="selCom" name="description" value="{{product.description}}">
+    </div>
+</div>
+<div class="part-form selCom">
+    <lable for="name">
+      Price: 
+    </lable>
+    <div class="input-field">
+      <input type="text" style="border: none;" class="selCom" name="price" value="{{product.price}}">
+    </div>
+</div>
+
+<div class="part-form selCom">
+    <lable for="name">
+      Init Amount: 
+    </lable>
+    <div class="input-field">
+      <input type="text" style="border: none;" class="selCom" name="initAmount" value="{{product.initAmount}}">
+    </div>
+</div>
+<div class="part-form selCom">
+    <lable for="name">
+        Remain: 
+    </lable>
+    <div class="input-field">
+      <input type="text" style="border: none;" class="selCom" name="remain" value="{{product.remain}}">
+    </div>
+</div>
+<div class="part-form selCom">
+    <lable for="image">
+        Image:
+    </lable>
+    <div style="overflow-x:hidden; width: 11%">
+      <input type="file" style="border: none" id="uploader">
+    </div>
+    <div class="input-field">
+      <input type="text" style="border: none;" class="selCom" id="filename" name="image" value="{{product.image}}">
+    </div>
+</div>
+<div><img src="{{product.GetPathImg}}"></div>
+<script>
+  
+document.getElementById("uploader").onchange = function() {
+  document.getElementById("filename").value = document.getElementById("uploader").files[0].name;
+}
+</script>

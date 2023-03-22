@@ -1,0 +1,166 @@
+{% extends 'Base/Base.html' %}
+
+
+{% block content %}
+<div class="title">Sản phẩm</div>
+<div class="add-block funcblock">
+  <div class="row">
+    <div style="background: #fff; border-radius: 10px">
+      <div class="part-title">Thêm sản phẩm</div>
+      <div class="col-lg-8 d-flex flex-column">
+        <form class="form" action="addProduct">
+          <div class="part-form">
+            <lable for="productName">
+              Product name: 
+            </lable>
+            <div class="input-field">
+              <input type="text" style="border: none" name="name" placeholder="Type in here">
+            </div>
+          </div>
+          <div class="part-form">
+            <lable for="productName">
+              Description: 
+            </lable>
+            <div class="input-field">
+              <input type="text" style="border: none" name="description" placeholder="Type in here">
+            </div>
+          </div>
+          <div class="part-form">
+            <lable for="productName">
+              Category: 
+            </lable>
+            <div class="input-field" style="display: inline-block">
+              <select name="cate_id">
+                <option>Select category</option>
+              {% for category in categories %}
+                <option value="{{category.id}}">{{category.name}}</option>
+              {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="part-form">
+              <lable for="price">
+                Price: 
+                <span>($)</span>
+              </lable>
+              <div class="input-field">
+                <input type="number" style="border: none" name="price" placeholder="Type in here">
+              </div>
+          </div>
+          <div class="part-form">
+            <lable for="amount">
+              Amount: 
+            </lable>
+            <div class="input-field">
+              <input type="text" style="border: none" name="amount" placeholder="Type in here">
+            </div>
+          </div>
+          <div class="part-form">
+            <lable for="image">
+              Image: 
+            </lable>
+            <div class="input-field" style="display: inline-block">
+              <input type="file" style="border: none" name="image">
+            </div>
+          </div>
+          
+          <div class="part-form">
+            <div class="input-field" style="text-align: right">
+              <input type="submit" name="Add" Value="Add">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="edit-block funcblock">
+  <div class="row">
+    <div style="background: #fff; border-radius: 10px">
+      <div class="part-title">Sửa sản phẩm</div>
+      <div class="col-lg-8 d-flex flex-column">
+        <form class="form" action="editProduct">
+          <div class="part-form">
+            <lable for="name">
+              Product id: 
+            </lable>
+            <div class="input-field"  style="display: inline-block;">
+              <select name="id" id="Product_Selector">
+                <option>Select a id</option>
+                {% for product in products %}
+                <option value="{{product.id}}">{{product.id}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div id="select_show">
+            <div class="part-form notshow selCom">
+              <lable for="name">
+                Category name: 
+              </lable>
+              <div class="input-field">
+                <input type="text" style="border: none;" class="selCom" name="name" value="">
+                {% comment %} {% for category in categories %}
+                <input type="text" style="border: none;" class="catename selCom" name="name" value="{{category.name}}">
+                {% endfor %} {% endcomment %}
+              </div>
+            </div>
+          </div>          
+          <div class="part-form">
+            <div class="input-field" style="text-align: right">
+              <input type="submit" name="Delete" Value="Delete">
+              <input type="submit" name="Edit" Value="Edit">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="view-block funcblock">
+  <div class="row">
+    <div style="background: #fff; border-radius: 10px">
+      <div class="part-title">Xem sản phẩm</div>
+      <div class="col-lg-12 d-flex flex-column">
+        <form class="form" action="allCategory">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Initilize Amount</th>
+                  <th>Remain Amount</th>
+                  <th>Image</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for product in products %}
+                <tr>
+                  <td>{{product.id}}</td>
+                  <td>{{product.name}}</td>
+                  <td><div style="width: 310px; white-space: break-spaces" >{{product.description}}</div></td>
+                  <td>{{product.cate_id.name}}</td>
+                  <td>{{product.price}}$</td>
+                  <td>{{product.initAmount}}</td>
+                  <td>{{product.remain}}</td>
+                  <td>{{product.image}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% block scroll %}
+{% endblock scroll %}
+{% endblock content %}
