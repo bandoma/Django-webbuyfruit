@@ -2,9 +2,10 @@
 from django.urls import include,path
 from Admin import views
 
+
 urlpatterns = [
-    path('', views.index),
     path('index', views.index),
+    path('',views.index),
     path('Login', views.Login),
     path('Check', views.Check),
     path('Product', views.allProduct),
@@ -14,5 +15,7 @@ urlpatterns = [
     path('addCategory', views.addCategory), 
     path('editCategory', views.editCategory),
     path('getCategory', views.getCategory),
-    path('getProduct', views.getProduct)
+    path('getProduct', views.getProduct),
+    path('profile',views.getprofile),
+    path('signout',views.SignOut)
 ]

@@ -28,7 +28,23 @@
     <link rel="stylesheet" href="{% static 'webclient/css/responsive.css' %}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'webclient/css/custom.css' %}">
-
+    <!-- Admin -->
+    <link rel="stylesheet" href="{% static 'vendors/feather/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/ti-icons/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/typicons/typicons.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/simple-line-icons/css/simple-line-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{% static 'vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
+    <link rel="stylesheet" href="{% static 'js/select.dataTables.min.css' %}">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{% static 'css/vertical-layout-light/style.css' %}">
+    <!-- endinject -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Admin -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -38,6 +54,7 @@
 
 <body>
     <!-- Start Main Top -->
+    {{user.username}}
     <div class="main-top">
         <div class="container-fluid">
             <div class="row">
@@ -54,19 +71,14 @@
                     </div>
                     <div class="our-link">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user s_color"></i> My Account</a></li>
+                            <li><a href="myaccount"><i class="fa fa-user s_color"></i> My Account</a></li>
                             <li><a href="#"><i class="fas fa-location-arrow"></i> Our location</a></li>
                             <li><a href="#"><i class="fas fa-headset"></i> Contact Us</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="login-box">
-						<select id="basic" class="selectpicker show-tick form-control" data-placeholder="Sign In">
-							<option>Register Here</option>
-							<option>Sign In</option>
-						</select>
-					</div>
+					
                     <div class="text-slid-box">
                         <div id="offer-box" class="carouselTicker">
                             <ul class="offer-box">
@@ -113,28 +125,54 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="index.html"><img src="static/webclient/images/logo.png" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="index"><img src="static/webclient/images/logo.png" class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                        
+                        <li class="nav-item"><a class="nav-link" href="about">About Us</a></li>
                         <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+                            <a href="#" class="nav-link arrow" data-toggle="dropdown">Shop</a>
                             <ul class="dropdown-menu">
 								<li><a href="shop">Sidebar Shop</a></li>
-								<li><a href="shop-detail">Shop Detail</a></li>
+								<li><a href="shopdetail">Shop Detail</a></li>
                                 <li><a href="cart">Cart</a></li>
                                 <li><a href="checkout">Checkout</a></li>
-                                <li><a href="my-account">My Account</a></li>
+                                <li><a href="myaccount">My Account</a></li>
                                 <li><a href="wishlist">Wishlist</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="gallery">Gallery</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contactus">Contact Us</a></li>
+                        {% if user %} 
+                        <li class="nav-item dropdown d-none d-lg-block user-dropdown">
+                            <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="true">
+                                <img class="img-xs rounded-circle" src="static/webclient/images/cuong.png" alt="Profile image" style="width: 41px; height: 40px;"> </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                                <div class="dropdown-header text-center">
+                                <img class="img-mx`d rounded-circle" src="static/webclient/images/cuong.png" alt="Profile image" style="width: 50px; height: 50px;">
+                                <p class="font-weight-semibold">{{user.username}}</p>
+                                <p class="fw-light text-muted" style="margin: 0px; padding: 0px;">{{user.email}}</p>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="myaccount"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-secondary">1</span></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="changepassword"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i>Change password</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="signout"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+                            </div>
+                            </li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="Login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="register">Register</a></li>
+                            {% endif %}
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -160,22 +198,22 @@
                 <li class="cart-box">
                     <ul class="cart-list">
                         <li>
-                            <a href="#" class="photo"><img src="static/webclient/images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
+                            <a href="#" class="photo"><img src="{% static '/webclient/images/img-pro-01.jpg' %}" class="cart-thumb" alt="" /></a>
                             <h6><a href="#">Delica omtantur </a></h6>
                             <p>1x - <span class="price">$80.00</span></p>
                         </li>
                         <li>
-                            <a href="#" class="photo"><img src="static/webclient/images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
+                            <a href="#" class="photo"><img src="{% static '/webclient/images/img-pro-02.jpg' %}" class="cart-thumb" alt="" /></a>
                             <h6><a href="#">Omnes ocurreret</a></h6>
                             <p>1x - <span class="price">$60.00</span></p>
                         </li>
                         <li>
-                            <a href="#" class="photo"><img src="static/webclient/images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
+                            <a href="#" class="photo"><img src="{% static '/webclient/images/img-pro-03.jpg' %}" class="cart-thumb" alt="" /></a>
                             <h6><a href="#">Agam facilisis</a></h6>
                             <p>1x - <span class="price">$40.00</span></p>
                         </li>
                         <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                            <a href="cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
                             <span class="float-right"><strong>Total</strong>: $180.00</span>
                         </li>
                     </ul>
@@ -205,7 +243,7 @@
         <div class="main-instagram owl-carousel owl-theme">
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="static/webclient/images/instagram-img-01.jpg" alt="" />
+                    <img src="{%static '/webclient/images/instagram-img-01.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -213,7 +251,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="static/webclient/images/instagram-img-02.jpg" alt="" />
+                    <img src="{% static '/webclient/images/instagram-img-02.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -221,7 +259,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="static/webclient/images/instagram-img-03.jpg" alt="" />
+                    <img src="{% static '/webclient/images/instagram-img-03.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -229,7 +267,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="static/webclient/images/instagram-img-04.jpg" alt="" />
+                    <img src="{% static '/webclient/images/instagram-img-04.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -237,7 +275,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="static/webclient/images/instagram-img-05.jpg" alt="" />
+                    <img src="{% static '/webclient/images/instagram-img-05.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -245,7 +283,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="static/webclient/images/instagram-img-06.jpg" alt="" />
+                    <img src=" {% static '/webclient/images/instagram-img-06.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -253,7 +291,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="static/webclient/images/instagram-img-07.jpg" alt="" />
+                    <img src="{% static '/webclient/images/instagram-img-07.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -261,7 +299,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="static/webclient/images/instagram-img-08.jpg" alt="" />
+                    <img src="{% static '/webclient/images/instagram-img-08.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -269,7 +307,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="static/webclient/images/instagram-img-09.jpg" alt="" />
+                    <img src="{% static '/webclient/images/instagram-img-09.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -277,7 +315,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="static/webclient/images/instagram-img-05.jpg" alt="" />
+                    <img src="{% static '/webclient/images/instagram-img-05.jpg' %}" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -342,7 +380,7 @@
                         <div class="footer-link">
                             <h4>Information</h4>
                             <ul>
-                                <li><a href="#">About Us</a></li>
+                                <li><a href="about">About Us</a></li>
                                 <li><a href="#">Customer Service</a></li>
                                 <li><a href="#">Our Sitemap</a></li>
                                 <li><a href="#">Terms &amp; Conditions</a></li>
@@ -383,21 +421,21 @@
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
     <!-- ALL JS FILES -->
-    <script src="static/webclient/js/jquery-3.2.1.min.js"></script>
-    <script src="static/webclient/js/popper.min.js"></script>
-    <script src="static/webclient/js/bootstrap.min.js"></script>
+    <script src="{%static '/webclient/js/jquery-3.2.1.min.js'%} "></script>
+    <script src="{%static '/webclient/js/popper.min.js' %}"></script>
+    <script src="{%static '/webclient/js/bootstrap.min.js'%} "></script>
     <!-- ALL PLUGINS -->
-    <script src="static/webclient/js/jquery.superslides.min.js"></script>
-    <script src="static/webclient/js/bootstrap-select.js"></script>
-    <script src="static/webclient/js/inewsticker.js"></script>
-    <script src="static/webclient/js/bootsnav.js."></script>
-    <script src="static/webclient/js/images-loded.min.js"></script>
-    <script src="static/webclient/js/isotope.min.js"></script>
-    <script src="static/webclient/js/owl.carousel.min.js"></script>
-    <script src="static/webclient/js/baguetteBox.min.js"></script>
-    <script src="static/webclient/js/form-validator.min.js"></script>
-    <script src="static/webclient/js/contact-form-script.js"></script>
-    <script src="static/webclient/js/custom.js"></script>
+    <script src="{%static '/webclient/js/jquery.superslides.min.js'%} "></script>
+    <script src="{%static '/webclient/js/bootstrap-select.js' %}"></script>
+    <script src="{%static '/webclient/js/inewsticker.js' %}"></script>
+    <script src="{%static '/webclient/js/bootsnav.js' %}"></script>
+    <script src="{%static '/webclient/js/images-loded.min.js' %}"></script>
+    <script src="{%static '/webclient/js/isotope.min.js' %}"></script>
+    <script src="{%static '/webclient/js/owl.carousel.min.js' %}"></script>
+    <script src="{%static '/webclient/js/baguetteBox.min.js' %}"></script>
+    <script src="{%static '/webclient/js/form-validator.min.js' %} "></script>
+    <script src="{%static '/webclient/js/contact-form-script.js' %}"></script>
+    <script src="{%static '/webclient/js/custom.js' %}"></script>
 </body>
 
 </html>

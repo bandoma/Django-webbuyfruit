@@ -8,7 +8,7 @@
                 <div class="col-lg-12">
                     <h2>Shop</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="index">Home</a></li>
                         <li class="breadcrumb-item active">Shop</li>
                     </ul>
                 </div>
@@ -63,7 +63,7 @@
                                                         <img src="{{product.GetPathImg}}" style="height: 16vw; width: 16vw" class="img-fluid" alt="Image">
                                                         <div class="mask-icon">
                                                             <ul>
-                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i data-toggle="modal" data-target="#exampleModal" class="fas fa-eye"></i></a></li>
                                                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                                             </ul>
                                                             <a class="cart" href="#">Add to Cart</a>
@@ -73,6 +73,45 @@
                                                         <h4>{{product.name}}</h4>
                                                         <h5>${{product.price}}</h5>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel"> {{product.name}} Detail</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                                                            <img src="{{product.GetPathImg}}" style="height: 16vw; width: 16vw;" class="img-fluid" alt="Image">
+                                                            <h4 style="text-align: center;">Name: {{product.name}}</h4>
+                                                            <h4 style="text-align: center;">Price: {{prosduct.price}}</h4>
+                                                            <h4 style="text-align: center;">Remain: {{product.remain}}</h4>
+                                                            <h4 style="text-align: center;">Description: {{product.description}}</h4>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Add to cart</button>
+                                                        </div>
+                                                    </div>
+                                                 <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    Wooooo
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                </div>
                                                 </div>
                                             </div>
                                         {% endfor %}

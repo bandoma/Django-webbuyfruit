@@ -7,7 +7,8 @@ class admin(models.Model):
     email = models.EmailField()
     password = models.CharField(max_length=12)
     username = models.CharField(max_length=30)
-
+    fullname=models.CharField(max_length=40,null=True)
+    Address=models.CharField(max_length=40, null=True)
     phone_regex = RegexValidator(regex='\d*', message="Trường này chỉ dùng cho kiểu số.")
     phone = models.CharField(validators=[phone_regex],max_length=12)
 
@@ -17,3 +18,11 @@ class admin(models.Model):
         except:
             user = None
         return user
+class NotifyMessage(models.Model):
+    id = models.AutoField(primary_key=True)
+    message=models.CharField(max_length=40)
+    # iduser=models.ForeignKey("auth_user", on_delete=models.CASCADE)
+    
+    
+    
+
