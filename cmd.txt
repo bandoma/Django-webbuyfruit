@@ -14,3 +14,7 @@ Create Migration to update database:
     python manage.py makemigrations
 Run Migration:
     python manage.py migrate (--database=[nameDatabase in setting.py])
+Github
+git add .
+git commit -m "nội dung"
+git push -u origin master   

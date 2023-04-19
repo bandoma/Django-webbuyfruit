@@ -62,13 +62,12 @@ def changepassword(request: HttpRequest):
             if passwordnew == passwordconfirm:
                 userrrr.password=passwordnew
                 userrrr.save()
-                return render(request,"changepassword.html",{"form":'Đổi mật khẩu thành công.'} )
-                
+                return render(request,"webclient/changepassword.html",{"form":'Đổi mật khẩu thành công.'} )
             else:
-                return render(request,"changepassword.html" ,{"form":'Mật khẩu mới và xác nhận mật khẩu không khớp.'})
+                return render(request,"webclient/changepassword.html" ,{"form":'Mật khẩu mới và xác nhận mật khẩu không khớp.'})
         else:
-            return render(request,"changepassword.html", {"form":'Mật khẩu cũ không đúng.'})
-    return HttpResponseRedirect("index")
+            return render(request,"webclient/changepassword.html", {"form":'Mật khẩu cũ không đúng.'})
+    return render(request,"webclient/changepassword.html")
 
 def ForgotPassword(request: HttpRequest):
     if request.session.get("Userid"):
