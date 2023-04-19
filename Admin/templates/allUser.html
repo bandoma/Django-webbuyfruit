@@ -1,0 +1,80 @@
+{% extends 'Base/Base.html' %}
+
+
+{% block content %}
+
+<div class="edit-block funcblock">
+  <div class="row">
+    <div style="background: #fff; border-radius: 10px">
+      <div class="part-title">Sửa User</div>
+      <div class="col-lg-8 d-flex flex-column">
+        <form class="form" action="editProduct">
+          <div class="part-form">
+            <lable for="name">
+              User id: 
+            </lable>
+            <div class="input-field"  style="display: inline-block;">
+              <select name="id" id="User_Selector">
+                <option>Select a id</option>
+                {% for user in users %}
+                <option value="{{user.id}}">{{user.id}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>          
+          <div class="part-form">
+            <div class="input-field" style="text-align: right">
+              <input type="submit" name="Delete" Value="Delete">
+              <input type="submit" name="Edit" Value="Edit">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="view-block funcblock">
+  <div class="row">
+    <div style="background: #fff; border-radius: 10px">
+      <div class="part-title">Xem User</div>
+      <div class="col-lg-12 d-flex flex-column">
+        <form class="form" action="allCategory">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Email</th>
+                  <th>User name</th>
+                  <th>Password</th>
+                  <th>Birthday</th>
+                  <th>Full name</th>
+                  <th>Address</th>
+                  <th>Phone</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users %}
+                <tr>
+                  <td>{{user.id}}</td>
+                  <td>{{user.email}}</td>
+                  <td><div style="width: 310px; white-space: break-spaces" >{{user.username}}</div></td>
+                  <td>{{user.password}}</td>
+                  <td>{{user.birthday}}$</td>
+                  <td>{{user.fullname}}</td>
+                  <td>{{user.Address}}</td>
+                  <td>{{user.phone}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% block scroll %}
+{% endblock scroll %}
+{% endblock content %}

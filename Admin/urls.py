@@ -17,5 +17,7 @@ urlpatterns = [
     path('getCategory', views.getCategory),
     path('getProduct', views.getProduct),
     path('profile',views.getprofile),
-    path('signout',views.SignOut)
+    path('signout',views.SignOut),
+    path('User',views.allUser),
+    
 ]

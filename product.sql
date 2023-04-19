@@ -3,13 +3,13 @@ INSERT INTO product_product (id, name, description, price, initAmount, remain, i
 
 
 
-VALUES (19,'Hạt hạnh nhân', 'hạt nhỏ màu nâu, có vị ngọt và giàu chất dinh dưỡng, là nguồn cung cấp chất béo tốt cho cơ thể, giúp giảm nguy cơ bệnh tim mạch, hỗ trợ sức khỏe não bộ và tiêu hóa, cùng với đó còn là nguyên liệu làm bánh, kem và nhiều món ăn ngon', '19', '500000', '500000', 'Images/hat-hanh-nhan.jpg' , 3);
-VALUES (20,'Hạt hồ đào', 'hạt nhỏ màu trắng, có vị ngọt và tính mát, được sử dụng trong nhiều món ăn và đồ uống, giúp tăng cường sức khỏe tim mạch, giảm cholesterol và tăng cường hệ miễn dịch', '14', '25000', '25000', 'Images/hat-ho-dao.jpg' , 3);
+VALUES (19,'Hạt hạnh nhân', 'hạt nhỏ màu nâu, có vị ngọt và giàu chất dinh dưỡng, là nguồn cung cấp chất béo tốt cho cơ thể, giúp giảm nguy cơ bệnh tim mạch, hỗ trợ sức khỏe não bộ và tiêu hóa, cùng với đó còn là nguyên liệu làm bánh, kem và nhiều món ăn ngon', '19', '500000', '500000', 'hat-hanh-nhan.jpg' , 3);
+VALUES (20,'Hạt hồ đào', 'hạt nhỏ màu trắng, có vị ngọt và tính mát, được sử dụng trong nhiều món ăn và đồ uống, giúp tăng cường sức khỏe tim mạch, giảm cholesterol và tăng cường hệ miễn dịch', '14', '25000', '25000', 'hat-ho-dao.jpg' , 3);
 VALUES (21,'Hạt hồ trần', 'nhỏ màu nâu đậm, vị đắng và tính mát, được sử dụng trong nhiều món ăn và đồ uống, giúp giảm đau, làm dịu viêm, hỗ trợ tiêu hóa và giảm căng thẳng', '17', '66000', '66000', 'Images/hat-ho-tran.jpg' , 3);
-VALUES (22,'Hạt hướng dương', 'Ngon, thơm, ăn vui miệng, rẻ', '6', '10000', '10000', 'Images/hat-huong-duong.jpg' , 3);
-VALUES (23,'Hạt mắc ca', 'Ngon, giàu dinh dưỡng, chỉ với 2 quả đã đủ năng lượng thay cho 1 bữa ăn', '13', '400000', '400000', 'Images/hat-mac-ca.jpg' , 3);
+VALUES (22,'Hạt hướng dương', 'Ngon, thơm, ăn vui miệng, rẻ', '6', '10000', '10000', 'hat-huong-duong.jpg' , 3);
+VALUES (23,'Hạt mắc ca', 'Ngon, giàu dinh dưỡng, chỉ với 2 quả đã đủ năng lượng thay cho 1 bữa ăn', '13', '400000', '400000', 'hat-mac-ca.jpg' , 3);
 VALUES (24,'Hạt óc chó', 'Giàu dinh dưỡng, vỏ rất cứng', '22', '300000', '300000', 'Images/hat-oc-cho.jpg' , 3);
-VALUES (25,'Hạt sen', 'Đặc sản Việt Nam, thơm ngon bổ dưỡng, có thể dùng để nấu rất nhiều món', '25', '50000', '50000', 'Images/hat-sen.jpg' , 3);
+VALUES (25,'Hạt sen', 'Đặc sản Việt Nam, thơm ngon bổ dưỡng, có thể dùng để nấu rất nhiều món', '25', '50000', '50000', 'hat-sen.jpg' , 3);
 VALUES (26,'Củ ấu', 'củ nhỏ màu trắng hoặc hồng nhạt, có vị ngọt và giòn', '13', '17000', '17000', 'Images/cuau.jpg' , 5);
 VALUES (27,'Củ cải đỏ', 'củ nhỏ màu đỏ tươi, có vị giòn và ngọt, là nguồn cung cấp chất xơ, vitamin và khoáng chất như sắt, canxi và magiê cho cơ thể', '30', '50000', '50000', 'Images/cucaido.jpg' , '5');
 VALUES (28,'Củ cải trắng', 'củ nhỏ màu trắng, có vị giòn và ngọt, là nguồn cung cấp chất xơ, vitamin và khoáng chất như kali và canxi cho cơ thể', '32', '50000', '50000', 'Images/cucaitrang.jpg' , '5');

@@ -63,7 +63,7 @@
                                                         <img src="{{product.GetPathImg}}" style="height: 16vw; width: 16vw" class="img-fluid" alt="Image">
                                                         <div class="mask-icon">
                                                             <ul>
-                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i data-toggle="modal" data-target="#exampleModal" class="fas fa-eye"></i></a></li>
+                                                                <li><a data-toggle="modal" data-target="#{{product.id}}" href="#" data-toggle="tooltip" data-placement="right" title="View"><i data-toggle="modal" data-target="#{{product.id}}" class="fas fa-eye"></i></a></li>
                                                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                                             </ul>
                                                             <a class="cart" href="#">Add to Cart</a>
@@ -75,7 +75,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -98,7 +98,7 @@
                                                             <button type="button" class="btn btn-primary">Add to cart</button>
                                                         </div>
                                                     </div>
-                                                 <div class="modal-content">
+                                                 {% comment %} <div class="modal-content">
                                                     <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                                                         <span aria-hidden="true">&times;</span>
@@ -111,7 +111,7 @@
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                     <button type="button" class="btn btn-primary">Save changes</button>
                                                     </div>
-                                                </div>
+                                                </div> {% endcomment %}
                                                 </div>
                                             </div>
                                         {% endfor %}

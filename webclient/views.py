@@ -4,7 +4,6 @@ from product import models
 from .models import user,ForgetPassword
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
-from django.contrib.messages import constants as messages
 import datetime
 from django.core.mail import send_mail
 # Create your views here.
@@ -64,7 +63,7 @@ def changepassword(request: HttpRequest):
                 userrrr.save()
                 return render(request,"webclient/changepassword.html",{"form":'Đổi mật khẩu thành công.'} )
             else:
-                return render(request,"webclient/changepassword.html" ,{"form":'Mật khẩu mới và xác nhận mật khẩu không khớp.'})
+                return render(request,"webclient/changepassword.html" ,{"form":'Không khớp.'})
         else:
             return render(request,"webclient/changepassword.html", {"form":'Mật khẩu cũ không đúng.'})
     return render(request,"webclient/changepassword.html")

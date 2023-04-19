@@ -3,7 +3,7 @@ from django.http import HttpRequest, HttpResponseRedirect, JsonResponse, HttpRes
 from Admin.models import admin
 
 from product import models
-
+from webclient.models import user
 # Create your views here.
 def index(request:HttpRequest):
     if not request.session.get("UserId"):
@@ -57,7 +57,9 @@ def allProduct(request: HttpRequest):
     categories = models.Category.objects.all()
     products = models.Product.objects.all()
     return render(request, "allProduct.html", {"categories":categories, "products":products, "ad" :getinfo()})
-
+def allUser(request: HttpRequest):
+    users=models.user.objects.all()
+    return render(request,"allUser.html",{"users":users})
 def addProduct(request: HttpRequest):
     if "Add" in request.GET:
         name = request.GET["name"]
