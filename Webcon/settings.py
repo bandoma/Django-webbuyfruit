@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'Admin',
     'product',
     'webclient',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [

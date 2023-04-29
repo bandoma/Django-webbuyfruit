@@ -19,5 +19,6 @@ urlpatterns = [
     path('profile',views.getprofile),
     path('signout',views.SignOut),
     path('User',views.allUser),
-    
+    path('deleteUser',views.deleteUser),
+    path('piechart',views.pie_chart),
 ]

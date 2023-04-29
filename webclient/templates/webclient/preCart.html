@@ -1,0 +1,12 @@
+{% for cartproduct in cart_products %}
+<li>
+    <a href="#" class="photo"><img src="{{cartproduct.product.GetPathImg}}" class="cart-thumb" alt=""></a>
+    <h6><a href="#">{{cartproduct.product.name}} </a></h6>
+    <p>{{cartproduct.number}}x <span class="price">${{cartproduct.product.price}}</span></p>
+</li>
+{% endfor %}
+
+<li class="total">
+    <a href="/cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+    <span class="float-right"><strong>Total</strong>: ${{total_price}}</span>
+</li>

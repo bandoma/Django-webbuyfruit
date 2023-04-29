@@ -27,23 +27,18 @@
                             <div class="col-12 col-sm-8 text-center text-sm-left">
                                 <div class="toolbar-sorter-right">
                                     <span>Sort by </span>
-                                    <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-									<option data-display="Select">Nothing</option>
-									<option value="1">Popularity</option>
-									<option value="2">High Price → High Price</option>
-									<option value="3">Low Price → High Price</option>
-									<option value="4">Best Selling</option>
+                                    <select id="sort" class="selectpicker show-tick form-control" data-placeholder="$ USD">
+									<option value="grid-view" data-display="Select">Nothing</option>
+									<option value="desc">High Price → Low Price </option>
+									<option value="asc">Low Price → High Price </option>
 								</select>
                                 </div>
-                                <p>Showing all 4 results</p>
+                                <p>Showing all 3 results</p>
                             </div>
                             <div class="col-12 col-sm-4 text-center text-sm-right">
                                 <ul class="nav nav-tabs ml-auto">
                                     <li>
                                         <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i class="fa fa-th"></i> </a>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link" href="#list-view" data-toggle="tab"> <i class="fa fa-list-ul"></i> </a>
                                     </li>
                                 </ul>
                             </div>
@@ -52,9 +47,9 @@
                         <div class="product-categorie-box">
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
-                                    <div class="row">
+                                    <div class="row product">
                                         {% for product in products %}
-                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 product_item">
                                                 <div class="products-single fix">
                                                     <div class="box-img-hover">
                                                         <div class="type-lb">
@@ -63,353 +58,147 @@
                                                         <img src="{{product.GetPathImg}}" style="height: 16vw; width: 16vw" class="img-fluid" alt="Image">
                                                         <div class="mask-icon">
                                                             <ul>
-                                                                <li><a data-toggle="modal" data-target="#{{product.id}}" href="#" data-toggle="tooltip" data-placement="right" title="View"><i data-toggle="modal" data-target="#{{product.id}}" class="fas fa-eye"></i></a></li>
+                                                                <li data-toggle="modal" data-target="#a{{product.id}}"><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                                                <li><a data-toggle="tooltip" data-placement="right" title="Add to Wishlist" class="AddtoWishList" productid="{{product.id}}"><i class="far fa-heart"></i></a></li>
+                                                            </ul>
+                                                            <a class="cart AddtoCart" productid="{{product.id}}">Add to Cart</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="why-text">
+                                                        <a href="shopdetail/{{product.id}}"><h4>{{product.name}}</h4></a>
+                                                        <h5>${{product.price}}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="a{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel"> {{product.name}} Detail</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+    
+                                                            <div class="modal-body" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                                                                <img src="{{product.GetPathImg}}" style="height: 16vw; width: 16vw;" class="img-fluid" alt="Image">
+                                                                <h4 style="text-align: center;">Name: {{product.name}}</h4>
+                                                                <h4 style="text-align: center;">Price: {{prosduct.price}}</h4>
+                                                                <h4 style="text-align: center;">Remain: {{product.remain}}</h4>
+                                                                <h4 style="text-align: center;">Description: {{product.description}}</h4>
+                                                            </div>
+    
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary">Add to cart</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="desc">
+                                    <div class="row product">
+                                        {% for product in products|dictsortreversed:"price" %}
+                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 product_item">
+                                                <div class="products-single fix">
+                                                    <div class="box-img-hover">
+                                                        <div class="type-lb">
+                                                            <p class="sale">Sale</p>
+                                                        </div>
+                                                        <img src="{{product.GetPathImg}}" style="height: 16vw; width: 16vw" class="img-fluid" alt="Image">
+                                                        <div class="mask-icon">
+                                                            <ul>
+                                                                <li data-toggle="modal" data-target="#b{{product.id}}"><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
                                                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                                             </ul>
                                                             <a class="cart" href="#">Add to Cart</a>
                                                         </div>
                                                     </div>
                                                     <div class="why-text">
-                                                        <h4>{{product.name}}</h4>
+                                                        <a href="shopdetail/{{product.id}}"><h4>{{product.name}}</h4></a>
                                                         <h5>${{product.price}}</h5>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="modal fade" id="{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel"> {{product.name}} Detail</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
+                                                <div class="modal fade" id="b{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel"> {{product.name}} Detail</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+    
+                                                            <div class="modal-body" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                                                                <img src="{{product.GetPathImg}}" style="height: 16vw; width: 16vw;" class="img-fluid" alt="Image">
+                                                                <h4 style="text-align: center;">Name: {{product.name}}</h4>
+                                                                <h4 style="text-align: center;">Price: {{prosduct.price}}</h4>
+                                                                <h4 style="text-align: center;">Remain: {{product.remain}}</h4>
+                                                                <h4 style="text-align: center;">Description: {{product.description}}</h4>
+                                                            </div>
+    
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary">Add to cart</button>
+                                                            </div>
                                                         </div>
-
-                                                        <div class="modal-body" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
-                                                            <img src="{{product.GetPathImg}}" style="height: 16vw; width: 16vw;" class="img-fluid" alt="Image">
-                                                            <h4 style="text-align: center;">Name: {{product.name}}</h4>
-                                                            <h4 style="text-align: center;">Price: {{prosduct.price}}</h4>
-                                                            <h4 style="text-align: center;">Remain: {{product.remain}}</h4>
-                                                            <h4 style="text-align: center;">Description: {{product.description}}</h4>
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Add to cart</button>
-                                                        </div>
                                                     </div>
-                                                 {% comment %} <div class="modal-content">
-                                                    <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                    Wooooo
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div> {% endcomment %}
                                                 </div>
                                             </div>
                                         {% endfor %}
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <div class="type-lb">
-                                                        <p class="sale">Sale</p>
-                                                    </div>
-                                                    <img src="static/webclient/images/img-pro-01.jpg" class="img-fluid" alt="Image">
-                                                    <div class="mask-icon">
-                                                        <ul>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                        </ul>
-                                                        <a class="cart" href="#">Add to Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class="why-text">
-                                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                                    <h5> $9.79</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <div class="type-lb">
-                                                        <p class="new">New</p>
-                                                    </div>
-                                                    <img src="static/webclient/images/img-pro-02.jpg" class="img-fluid" alt="Image">
-                                                    <div class="mask-icon">
-                                                        <ul>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                        </ul>
-                                                        <a class="cart" href="#">Add to Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class="why-text">
-                                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                                    <h5> $9.79</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <div class="type-lb">
-                                                        <p class="sale">Sale</p>
-                                                    </div>
-                                                    <img src="static/webclient/images/img-pro-03.jpg" class="img-fluid" alt="Image">
-                                                    <div class="mask-icon">
-                                                        <ul>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                        </ul>
-                                                        <a class="cart" href="#">Add to Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class="why-text">
-                                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                                    <h5> $9.79</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <div class="type-lb">
-                                                        <p class="new">New</p>
-                                                    </div>
-                                                    <img src="static/webclient/images/img-pro-01.jpg" class="img-fluid" alt="Image">
-                                                    <div class="mask-icon">
-                                                        <ul>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                        </ul>
-                                                        <a class="cart" href="#">Add to Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class="why-text">
-                                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                                    <h5> $9.79</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <div class="type-lb">
-                                                        <p class="sale">Sale</p>
-                                                    </div>
-                                                    <img src="static/webclient/images/img-pro-02.jpg" class="img-fluid" alt="Image">
-                                                    <div class="mask-icon">
-                                                        <ul>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                        </ul>
-                                                        <a class="cart" href="#">Add to Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class="why-text">
-                                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                                    <h5> $9.79</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <div class="type-lb">
-                                                        <p class="sale">Sale</p>
-                                                    </div>
-                                                    <img src="static/webclient/images/img-pro-03.jpg" class="img-fluid" alt="Image">
-                                                    <div class="mask-icon">
-                                                        <ul>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                        </ul>
-                                                        <a class="cart" href="#">Add to Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class="why-text">
-                                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                                    <h5> $9.79</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <div class="type-lb">
-                                                        <p class="sale">Sale</p>
-                                                    </div>
-                                                    <img src="static/webclient/images/img-pro-01.jpg" class="img-fluid" alt="Image">
-                                                    <div class="mask-icon">
-                                                        <ul>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                        </ul>
-                                                        <a class="cart" href="#">Add to Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class="why-text">
-                                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                                    <h5> $9.79</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <div class="type-lb">
-                                                        <p class="sale">Sale</p>
-                                                    </div>
-                                                    <img src="static/webclient/images/img-pro-02.jpg" class="img-fluid" alt="Image">
-                                                    <div class="mask-icon">
-                                                        <ul>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                        </ul>
-                                                        <a class="cart" href="#">Add to Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class="why-text">
-                                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                                    <h5> $9.79</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <div class="type-lb">
-                                                        <p class="new">New</p>
-                                                    </div>
-                                                    <img src="static/webclient/images/img-pro-03.jpg" class="img-fluid" alt="Image">
-                                                    <div class="mask-icon">
-                                                        <ul>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                        </ul>
-                                                        <a class="cart" href="#">Add to Cart</a>
-                                                    </div>
-                                                </div>
-                                                <div class="why-text">
-                                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                                    <h5> $9.79</h5>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane fade" id="list-view">
-                                    <div class="list-view-box">
-                                        <div class="row">
-                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                                <div class="products-single fix">
-                                                    <div class="box-img-hover">
-                                                        <div class="type-lb">
-                                                            <p class="new">New</p>
-                                                        </div>
-                                                        <img src="static/webclient/images/img-pro-01.jpg" class="img-fluid" alt="Image">
-                                                        <div class="mask-icon">
-                                                            <ul>
-                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                            </ul>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
-                                                <div class="why-text full-width">
-                                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                                    <h5> <del>$ 60.00</del> $40.79</h5>
-                                                    <p>Integer tincidunt aliquet nibh vitae dictum. In turpis sapien, imperdiet quis magna nec, iaculis ultrices ante. Integer vitae suscipit nisi. Morbi dignissim risus sit amet orci porta, eget aliquam purus
-                                                        sollicitudin. Cras eu metus felis. Sed arcu arcu, sagittis in blandit eu, imperdiet sit amet eros. Donec accumsan nisi purus, quis euismod ex volutpat in. Vestibulum eleifend eros ac lobortis aliquet.
-                                                        Suspendisse at ipsum vel lacus vehicula blandit et sollicitudin quam. Praesent vulputate semper libero pulvinar consequat. Etiam ut placerat lectus.</p>
-                                                    <a class="btn hvr-hover" href="#">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-view-box">
-                                        <div class="row">
-                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                <div role="tabpanel" class="tab-pane fade" id="asc">
+                                    <div class="row product">
+                                        {% for product in products|dictsort:"price" %}
+                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 product_item">
                                                 <div class="products-single fix">
                                                     <div class="box-img-hover">
                                                         <div class="type-lb">
                                                             <p class="sale">Sale</p>
                                                         </div>
-                                                        <img src="static/webclient/images/img-pro-02.jpg" class="img-fluid" alt="Image">
+                                                        <img src="{{product.GetPathImg}}" style="height: 16vw; width: 16vw" class="img-fluid" alt="Image">
                                                         <div class="mask-icon">
                                                             <ul>
-                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                                                <li data-toggle="modal" data-target="#c{{product.id}}"><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
                                                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                                             </ul>
-
+                                                            <a class="cart" href="#">Add to Cart</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="why-text">
+                                                        <a href="shopdetail/{{product.id}}"><h4>{{product.name}}</h4></a>
+                                                        <h5>${{product.price}}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="c{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel"> {{product.name}} Detail</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                                                                <img src="{{product.GetPathImg}}" style="height: 16vw; width: 16vw;" class="img-fluid" alt="Image">
+                                                                <h4 style="text-align: center;">Name: {{product.name}}</h4>
+                                                                <h4 style="text-align: center;">Price: {{prosduct.price}}</h4>
+                                                                <h4 style="text-align: center;">Remain: {{product.remain}}</h4>
+                                                                <h4 style="text-align: center;">Description: {{product.description}}</h4>
+                                                            </div>
+    
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary">Add to cart</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
-                                                <div class="why-text full-width">
-                                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                                    <h5> <del>$ 60.00</del> $40.79</h5>
-                                                    <p>Integer tincidunt aliquet nibh vitae dictum. In turpis sapien, imperdiet quis magna nec, iaculis ultrices ante. Integer vitae suscipit nisi. Morbi dignissim risus sit amet orci porta, eget aliquam purus
-                                                        sollicitudin. Cras eu metus felis. Sed arcu arcu, sagittis in blandit eu, imperdiet sit amet eros. Donec accumsan nisi purus, quis euismod ex volutpat in. Vestibulum eleifend eros ac lobortis aliquet.
-                                                        Suspendisse at ipsum vel lacus vehicula blandit et sollicitudin quam. Praesent vulputate semper libero pulvinar consequat. Etiam ut placerat lectus.</p>
-                                                    <a class="btn hvr-hover" href="#">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-view-box">
-                                        <div class="row">
-                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                                <div class="products-single fix">
-                                                    <div class="box-img-hover">
-                                                        <div class="type-lb">
-                                                            <p class="sale">Sale</p>
-                                                        </div>
-                                                        <img src="static/webclient/images/img-pro-03.jpg" class="img-fluid" alt="Image">
-                                                        <div class="mask-icon">
-                                                            <ul>
-                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                            </ul>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
-                                                <div class="why-text full-width">
-                                                    <h4>Lorem ipsum dolor sit amet</h4>
-                                                    <h5> <del>$ 60.00</del> $40.79</h5>
-                                                    <p>Integer tincidunt aliquet nibh vitae dictum. In turpis sapien, imperdiet quis magna nec, iaculis ultrices ante. Integer vitae suscipit nisi. Morbi dignissim risus sit amet orci porta, eget aliquam purus
-                                                        sollicitudin. Cras eu metus felis. Sed arcu arcu, sagittis in blandit eu, imperdiet sit amet eros. Donec accumsan nisi purus, quis euismod ex volutpat in. Vestibulum eleifend eros ac lobortis aliquet.
-                                                        Suspendisse at ipsum vel lacus vehicula blandit et sollicitudin quam. Praesent vulputate semper libero pulvinar consequat. Etiam ut placerat lectus.</p>
-                                                    <a class="btn hvr-hover" href="#">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -474,8 +263,97 @@
                     </div>
                 </div>
             </div>
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <div class="page-link" tabindex="-1">Previous</div>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
     <!-- End Shop Page -->
+    <script>
+        var listItem = document.querySelectorAll(".tab-pane.fade.show.active .product_item");
+        var perPage = 9;
+        var page = 1;
+        var pages = Math.ceil(listItem.length/perPage);
+        var paginations = document.querySelector('.pagination');
+        
+        for(var i=0;i<pages;i++){
+            var number = document.createElement('li');
+            number.classList.add('page-item');
+            var numberDiv = document.createElement('div');
+            numberDiv.classList.add('page-link');
+            numberDiv.setAttribute('data-index',i);
+            var numberIn = document.createTextNode(i+1);
+            numberDiv.appendChild(numberIn);
+            number.appendChild(numberDiv);
+            number.addEventListener('click',function(e){
+                var self = e.target;
+                goToPage(self.getAttribute('data-index'));
+            })
 
+            paginations.appendChild(number);
+        }
+        var previous = document.querySelector('.page-item');
+        previous.addEventListener('click',function(){
+            if(page>1){
+                page--;
+                Show();
+            }
+        })
+
+        var next = document.createElement('li');
+        var aNext = document.createElement('div');
+        var textNext = document.createTextNode('Next');
+        next.classList.add('page-item');
+        aNext.classList.add('page-link');
+        aNext.appendChild(textNext);
+        next.appendChild(aNext);
+        next.addEventListener('click',function(){
+            if(page<pages){
+                page++;
+                Show();
+            }
+        })
+        paginations.appendChild(next);
+
+        function Show(){
+            for(var i=0;i<listItem.length;i++){
+                listItem[i].classList.add('d-none');
+            }
+            var offset = (page - 1)*perPage;
+            var pagination = document.querySelectorAll('.page-item');
+            for(var i=1;i<pagination.length-1;i++){
+                pagination[i].classList.remove('active');
+            }
+            pagination[page].classList.add('active');
+            for(var i=offset;i<offset+perPage;i++){
+                if(i>=listItem.length) break;
+                listItem[i].classList.remove('d-none');
+            }
+        }
+        function goToPage(index){
+            index = parseInt(index);
+            page = index + 1;
+            Show();
+        }
+        Show();
+        var choice = document.getElementById("sort");
+        choice.onchange = function(){
+            var value = choice.value;
+            try {
+                var active = document.querySelector(".show.active");
+                active.classList.remove("show");
+                active.classList.remove("active");
+                var show = document.getElementById(choice.value);
+                show.classList.add("show","active");
+                listItem = document.querySelectorAll(".tab-pane.fade.show.active .product_item");
+                Show();
+            }
+            catch(e){
+            }
+        }
+    </script>
 {% endblock content %}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REPORT</title>
+    {% load static %}
+    {% comment %} <link rel="stylesheet" href="{% static '/webclient/css/forgetpassword.css' %}"> {% endcomment %}
+    <style>
+        .btn-back-to-home {
+            display: inline-block;
+            padding: 13px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left: 10px;
+          }
+          /* Set the background color of the body element */
+    body {
+    background-color: #f2f2f2;
+    }
+
+    /* Center the container element horizontally and vertically */
+    .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    }
+
+    /* Style the h1 element */
+    h1 {
+    font-size: 3em;
+    margin-bottom: 30px;
+    }
+
+    /* Style the label element */
+    label {
+    font-size: 1.2em;
+    display: block;
+    margin-bottom: 10px;
+    }
+
+    /* Style the select element */
+    select {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 20px;
+    }
+
+    /* Style the input[type="submit"] element */
+    input[type="submit"] {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+    }
+
+    /* Style the a.btn-back-to-home element */
+    a.btn-back-to-home {
+    display: inline-block;
+    padding: 13px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    }
+
+    /* Style the .container element for smaller screens */
+    @media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BÁO CÁO</h1>
+        
+        <form method="POST" action='report'>
+            {% csrf_token %}
+            <label>Bạn muốn báo cáo vấn đề gì</label>
+
+            <select name="message">
+                <option>Hàng quá ít</option>
+                <option>Hàng quá tệ</option>
+                <option>Vấn đề về hoàn tiền</option>
+                <option>Vấn đề về ship</option>
+            </select>
+            <input type="submit" value="Send!">
+            <a href="index" class="btn-back-to-home" style="margin-top: 50px; margin-left: 68px;">Back to Home</a>
+            <br>
+            <br>
+            {{thongbao}}
+        </form>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
