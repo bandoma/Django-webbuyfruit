@@ -251,13 +251,17 @@ def shopdetail(request: HttpRequest,id):
     productt = models.Product.objects.get(id=id)
     return render(request,"webclient/shop-detail.html",{'user': userrrr,'product': productt})
 def report(request:HttpRequest):
+    cart_products=None
+    userrrr=None
     if request.session.get("Userid"):
+        userrrr=user.objects.get(id=request.session.get("Userid"))
+        cart_products = list(userrrr.cart.cart_product_many_many_set.all())
         if request.method=="POST":
             message = request.POST['message']
             dt = datetime.now()
             userr = user.objects.get(id=request.session.get("Userid"))
             Report.objects.create(message=message, datetime=dt,user=userr)
-        return render(request,"webclient/report.html",{"thongbao" : "admin đã nhận tin nhắn của bạn ","cart_products":list(user.cart.cart_product_many_many_set.all()) })
+        return render(request,"webclient/report.html",{"thongbao" : "admin đã nhận tin nhắn của bạn ","cart_products":cart_products,"user":userrrr })
     return render(request,"webclient/report.html")
         
 

@@ -4,9 +4,11 @@ from Admin.models import admin
 
 from product import models
 from webclient.models import user, Report
+from product.models import Product
 import io
 import urllib, base64
 from django.shortcuts import render
+import datetime
 from django.http import HttpResponse
 # Create your views here.
 def index(request:HttpRequest):
@@ -76,11 +78,9 @@ def allProduct(request: HttpRequest):
 def allUser(request: HttpRequest):
     report=Report.objects.all()
     users=user.objects.all()
-    users=user.objects.all()
     return render(request,"allUser.html",{"users":users,"reports": report,"user":users})
 def deleteUser(request: HttpRequest):
     report=Report.objects.all()
-    users=user.objects.all()
     users=user.objects.all()
     if "Delete" in request.GET:
         id = request.GET["id"]
@@ -145,8 +145,26 @@ def getprofile(request: HttpRequest):
     users=user.objects.all()
     return render(request,"Base/BaseProfile.html",{"reports": report,"user":users,"ad" :getinfo()})
 
-def pie_chart(request):
+def pie_chart(request: HttpRequest):
     report=Report.objects.all()
     users=user.objects.all()
     categories = models.Category.objects.all()
     return render(request,"piechart.html",{"categories":categories,"reports": report,"user":users,"ad" :getinfo()})
+def column_chart(request: HttpRequest):
+    products = models.Product.objects.all()
+    report=Report.objects.all()
+    users=user.objects.all()
+    x=[product.name for product in products]
+    y=[len(product.order_detail_set.all()) for product in products]
+    print(x)
+    return render(request,"columnchart.html",{"x":x,"y":y,"reports": report,"user":users})
+def senduser(request:HttpRequest):
+    if request.session.get("Userid"):
+        users=user.objects.all()
+        if request.method=="POST":
+            message = request.POST['message']
+            dt = datetime.datetime.now()
+            userr = user.objects.get(id=request.session.get("Userid"))
+            Report.objects.create(message=message, datetime=dt,user=userr)
+        return render(request,"senduser.html",{"thongbao" : "Bạn đã phản hồi cho user","user":users })
+    return render(request,"senduser.html")

@@ -82,8 +82,8 @@
                 <div class="preview-thumbnail">
                   <i class="mdi mdi-alert m-auto text-primary"></i>
                 </div>
-                <div class="preview-item-content">
-                  <h6 class="preview-subject fw-normal text-dark mb-1">Application Error</h6>
+                <div class="preview-item-content" >
+                 <h6 href="senduser" class="preview-subject fw-normal text-dark mb-1" >Trả lời cho user</h6>
                   <p class="fw-light small-text mb-0"> Just now </p>
                 </div>
               </a>
@@ -388,16 +388,16 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item nav-category">Biểu đồ cột </li>
+          <li class="nav-item nav-category">Biểu đồ </li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="menu-icon mdi mdi-card-text-outline"></i>
-              <span class="menu-title">Biểu đồ</span>
+              <span class="menu-title">Biểu đồ cột</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Đánh giá sản phẩm</a></li>
+                <li class="nav-item"><a class="nav-link" href="columnchart">Sản phẩm nào được mua nhiều</a></li>
               </ul>
             </div>
           </li>
@@ -507,7 +507,9 @@
   <script src="{% static 'js/Chart.roundedBarCharts.js' %}"></script>
   <!-- End custom js for this page-->
   <script src="{% static 'js/myjs.js' %}"></script>
+  {% block script  %}{% endblock  %}
 </body>
 
 </html>
+
 

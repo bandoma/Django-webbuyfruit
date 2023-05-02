@@ -21,4 +21,6 @@ urlpatterns = [
     path('User',views.allUser),
     path('deleteUser',views.deleteUser),
     path('piechart',views.pie_chart),
+    path('columnchart',views.column_chart),
+    path('senduser',views.senduser),
 ]
