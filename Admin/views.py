@@ -3,7 +3,8 @@ from django.http import HttpRequest, HttpResponseRedirect, JsonResponse, HttpRes
 from Admin.models import admin
 
 from product import models
-from webclient.models import user, Report
+from webclient.models import user,Report
+from .models import traloiuser
 from product.models import Product
 import io
 import urllib, base64
@@ -158,13 +159,13 @@ def column_chart(request: HttpRequest):
     y=[len(product.order_detail_set.all()) for product in products]
     print(x)
     return render(request,"columnchart.html",{"x":x,"y":y,"reports": report,"user":users})
-def senduser(request:HttpRequest):
-    if request.session.get("Userid"):
-        users=user.objects.all()
+def traloi(request: HttpRequest):
+    if request.session.get("UserId"):
         if request.method=="POST":
             message = request.POST['message']
             dt = datetime.datetime.now()
-            userr = user.objects.get(id=request.session.get("Userid"))
-            Report.objects.create(message=message, datetime=dt,user=userr)
-        return render(request,"senduser.html",{"thongbao" : "Bạn đã phản hồi cho user","user":users })
-    return render(request,"senduser.html")
+            adminn= admin.objects.get(id=request.session.get("UserId"))
+            userr=user.objects.get(id=request.POST['userid'])
+            traloiuser.objects.create(message=message, datetime=dt,admin=adminn,user=userr)
+            return render(request,"senduser.html",{"thongbao" : "Bạn đã gửi tin nhắn cho "+userr.username })
+    return render(request,"senduser.html",{"reports":Report.objects.all()})

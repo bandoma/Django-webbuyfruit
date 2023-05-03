@@ -83,7 +83,7 @@
                   <i class="mdi mdi-alert m-auto text-primary"></i>
                 </div>
                 <div class="preview-item-content" >
-                 <h6 href="senduser" class="preview-subject fw-normal text-dark mb-1" >Trả lời cho user</h6>
+                  <h6 class="preview-subject fw-normal text-dark mb-1"><a href="traloi" class="preview-subject fw-normal text-dark mb-1">Trả lời cho user</a></h6>
                   <p class="fw-light small-text mb-0"> Just now </p>
                 </div>
               </a>
@@ -114,10 +114,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="countDropdown">
               <a class="dropdown-item py-3">
-                
                 <p class="mb-0 font-weight-medium float-left">Bạn có thông báo mới </p>
-                 
-
               </a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item preview-item">
@@ -133,6 +130,7 @@
                   <p class="fw-light small-text mb-0">
                     {{report.message}}
                   </p>
+
                   {% endfor %}
                   {% endif %}
                   

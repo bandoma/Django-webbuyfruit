@@ -1,0 +1,14 @@
+<div class="container">
+    <h1>Admin Trả lời</h1>
+    
+    
+    <form method="POST" action='admintraloi'>
+        {% csrf_token %}
+    
+        
+        {% for traloi in tralois  %}
+        <p>Cảm ơn bạn {{users.username}} đã báo cáo về cho admin</p>
+        <p> Tôi đã kiểm tra báo cáo của bạn,tôi xin trả lời : {{traloi.message}}</p>
+        {% endfor %}
+    </form>
+</div>

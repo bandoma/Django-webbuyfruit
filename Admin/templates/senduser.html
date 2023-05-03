@@ -85,8 +85,24 @@
     <div class="container">
         <h1>BÁO CÁO</h1>
         
-        <form method="POST" action='senduser'>
+        <form method="POST" action='traloi'>
             {% csrf_token %}
+            {% if reports %}
+
+            {% for report in reports %}
+            <div class="row ahihi" username="{{report.user.username}}"  onclick="ahihi(this)"  userid="{{report.user.id}}">
+            <p class="preview-subject ellipsis font-weight-medium text-dark">
+              {{report.user.username}}
+            </p>
+            <p class="fw-light small-text mb-0">
+              {{report.message}}
+            </p>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <input type="text" hidden height="60px" id="userid" value="chuachonuser" name="userid">
+            <div  id="username"> chưa có user </div>
+            
             <label>Nhắn tin cho user</label>
             <input type="text" height="60px" id="message" name="message"><br><br>
             <input type="submit" value="Send!">
@@ -97,4 +113,12 @@
         </form>
     </div>
 </body>
+<script>
+    function ahihi (e)  {
+        userid=e.getAttribute("userid");
+        document.getElementById("username").innerHTML=e.getAttribute("username");
+        document.getElementById("userid").value=userid;
+
+    }
+</script>
 </html>

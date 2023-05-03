@@ -29,6 +29,9 @@ urlpatterns = [
     path('updateCart',views.updateCart),
     path('Receipt',views.receipt),
     path('checkout',views.Checkout),
+    path('admintraloi',views.admintraloi),
+   
+    
     
 
 

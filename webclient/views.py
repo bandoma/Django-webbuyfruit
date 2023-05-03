@@ -7,25 +7,28 @@ from django.contrib.auth import authenticate
 from datetime import datetime
 from django.core.mail import send_mail
 from django.db.models import Q
+from Admin.models import traloiuser
 # Create your views here.
 def index(request: HttpRequest):
-    
+    report=Report.objects.all()
     userrrr=None
     cart_products=None
+    traloi=None
     if request.session.get("Userid"):
-        
         userrrr=user.objects.get(id=request.session.get("Userid"))
         cart_products = list(userrrr.cart.cart_product_many_many_set.all())
-    return render(request, "webclient/index.html",{'user':userrrr,"cart_products": cart_products})
+        traloi=traloiuser.objects.filter(user=userrrr)
+    return render(request, "webclient/index.html",{'user':userrrr,"cart_products": cart_products,"reports": report,"traloi":traloi})
     
 def shop(request: HttpRequest):
+    report=Report.objects.all()
     products = models.Product.objects.all()
     userrrr=None
     cart_products=None
     if request.session.get("Userid"):
         userrrr=user.objects.get(id=request.session.get("Userid"))
         cart_products = list(userrrr.cart.cart_product_many_many_set.all())
-    return render(request, "webclient/shop.html", {"products": products, 'user':userrrr,"cart_products": cart_products})
+    return render(request, "webclient/shop.html", {"products": products, 'user':userrrr,"reports": report,"cart_products": cart_products})
 def register(request:HttpRequest):
     if request.method == 'POST':
         username = request.POST['username']
@@ -221,6 +224,8 @@ def gallery(request:HttpRequest):
 def myaccount(request:HttpRequest):
     userrrr=None
     cart_products=None
+    if not request.session.get("Userid"):
+        return HttpResponseRedirect("/Login")
     if request.session.get("Userid"):
         userrrr=user.objects.get(id=request.session.get("Userid"))
         cart_products = list(userrrr.cart.cart_product_many_many_set.all())
@@ -253,6 +258,7 @@ def shopdetail(request: HttpRequest,id):
 def report(request:HttpRequest):
     cart_products=None
     userrrr=None
+    
     if request.session.get("Userid"):
         userrrr=user.objects.get(id=request.session.get("Userid"))
         cart_products = list(userrrr.cart.cart_product_many_many_set.all())
@@ -263,6 +269,10 @@ def report(request:HttpRequest):
             Report.objects.create(message=message, datetime=dt,user=userr)
         return render(request,"webclient/report.html",{"thongbao" : "admin đã nhận tin nhắn của bạn ","cart_products":cart_products,"user":userrrr })
     return render(request,"webclient/report.html")
+def admintraloi(request: HttpRequest):
+    userrrr=user.objects.get(id=request.session.get("Userid"))
+    traloi=traloiuser.objects.filter(user=userrrr)
+    return render(request,"webclient/admintraloi.html",{"tralois":traloi,"users":userrrr})
         
 
 
