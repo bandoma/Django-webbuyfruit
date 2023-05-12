@@ -49,7 +49,42 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <style>
+        .btn.btn-default.hvr-hover.btn-cart {
+            background: #000000;
+        }
+        #notice-message {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 2px;
+            padding: 16px 10px;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+            transition: all linear 0.3s;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .tb {
+            animation : slideInLeft ease .3s, fadeOut linear 1s 3s forwards;
+            font-size: 20px;
+        }
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(calc(100% - 32px));
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            }
+            
+            @keyframes fadeOut {
+            to {
+                opacity: 0;
+            }
+            }
+    </style>
 </head>
 
 <body>
@@ -125,7 +160,7 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="index"><img src="static/webclient/images/logo.png" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="index"><img src="/static/webclient/images/logo.png" class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
 
@@ -147,23 +182,23 @@
                         {% if user %} 
                         <li class="nav-item dropdown d-none d-lg-block user-dropdown">
                             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="true">
-                                <img class="img-xs rounded-circle" src="static/webclient/images/cuong.png" alt="Profile image" style="width: 41px; height: 40px;"> </a>
+                                <img class="img-xs rounded-circle" src="/static/webclient/images/cuong.png" alt="Profile image" style="width: 41px; height: 40px;"> </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                                 <div class="dropdown-header text-center">
-                                <img class="img-mx`d rounded-circle" src="static/webclient/images/cuong.png" alt="Profile image" style="width: 50px; height: 50px;">
+                                <img class="img-mx`d rounded-circle" src="/static/webclient/images/cuong.png" alt="Profile image" style="width: 50px; height: 50px;">
                                 <p class="font-weight-semibold">{{user.username}}</p>
                                 <p class="fw-light text-muted" style="margin: 0px; padding: 0px;">{{user.email}}</p>
                                 </div>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="myaccount"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-secondary">1</span></a>
+                                <a class="dropdown-item" href="/myaccount"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-secondary">1</span></a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="changepassword"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i>Change password</a>
+                                <a class="dropdown-item" href="/changepassword"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i>Change password</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="report"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Report</a>
+                                <a class="dropdown-item" href="/report"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Report</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href ="admintraloi"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i>Admin trả lời</a>
+                                <a class="dropdown-item" href ="/admintraloi"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i>Admin trả lời</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="signout"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+                                <a class="dropdown-item" href="/signout"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
                             </div>
                             </li>
                         {% else %}
@@ -175,6 +210,7 @@
                 <!-- /.navbar-collapse -->
 
                 <!-- Start Atribute Navigation -->
+                {% if user %} 
                 <div class="attr-nav">
                     <ul>
                         <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
@@ -187,6 +223,7 @@
 						</li>
                     </ul>
                 </div>
+                {% endif %}
                 <!-- End Atribute Navigation -->
             </div>
             <!-- Start Side Menu -->
@@ -322,7 +359,10 @@
     </div>
     <!-- End Instagram Feed  -->
 
-    <div style="position: fixed; top: 90vh; width: 100px; height: 100px; overflow-y: hidden;" id="notice-message">
+    <div style="position: fixed; bottom: 32px; left: 32px; z-index:999;" id="notice-message">
+
+    </div>
+
     </div>
     <!-- Start Footer  -->
     <footer>
@@ -433,7 +473,19 @@
     <script src="{%static '/webclient/js/baguetteBox.min.js' %}"></script>
     <script src="{%static '/webclient/js/form-validator.min.js' %} "></script>
     <script src="{%static '/webclient/js/contact-form-script.js' %}"></script>
-    <script src="{%static '/webclient/js/custom.js' %}"></script>
+    <script src="{%static '/webclient/js/custom.js' %}" id="myscript"></script>
+    <script>
+        const main = document.getElementById("notice-message");
+        main.addEventListener('DOMSubtreeModified',function(){
+            const a = main.lastChild;
+            const autoRemoveId = setTimeout(function (){
+                main.removeChild(a);}, 4000);
+                main.lastChild.onclick = function(e){
+                main.removeChild(a);
+                clearTimeout(autoRemoveId);
+            }
+        })
+    </script>
     {% block js %}{% endblock js %}
 </body>
 

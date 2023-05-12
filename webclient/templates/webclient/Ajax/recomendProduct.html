@@ -1,0 +1,20 @@
+{% for product in products %}
+<div class="item" style="width: 24%; display: inline-block">
+    <div class="products-single fix">
+        <div class="box-img-hover">
+            <img src="{{product.GetPathImg}}" width="200" class="img-fluid" alt="Image">
+            <div class="mask-icon">
+                <ul>
+                    <li><a class="AddtoWishList2" productid="{{product.id}}" data-toggle="tooltip" data-placement="right" title="Add to Wishlist" ><i class="far fa-heart"></i></a></li>
+                </ul>
+                <a class="cart AddtoCart2" productid="{{product.id}}">Add to Cart</a>
+            </div>
+        </div>
+        <div class="why-text">
+            <a href="/shopdetail/{{product.id}}"><h4 class="name">{{product.name}}</h4></a>
+            <h5> ${{product.price}}</h5>
+        </div>
+    </div>
+</div>
+
+{% endfor %}

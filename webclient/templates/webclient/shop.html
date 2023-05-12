@@ -1,6 +1,14 @@
 {% extends 'webclient/Base/Base.html' %}
 {% block content %}
 {% load static %}
+    <style>
+        .btn-group.bootstrap-select.show-tick.form-control{
+            height: 100%;
+        }
+        .filter-option.pull-left{
+            text-align: center;
+        }
+    </style>
     <!-- Start All Title Box -->
     <div class="all-title-box">
         <div class="container">
@@ -59,13 +67,13 @@
                                                         <div class="mask-icon">
                                                             <ul>
                                                                 <li data-toggle="modal" data-target="#a{{product.id}}"><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                                <li><a data-toggle="tooltip" data-placement="right" title="Add to Wishlist" class="AddtoWishList" productid="{{product.id}}"><i class="far fa-heart"></i></a></li>
+                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"class="AddtoWishList" productid="{{product.id}}"><i class="far fa-heart AddtoWishList" ></i></a></li>
                                                             </ul>
                                                             <a class="cart AddtoCart" productid="{{product.id}}">Add to Cart</a>
                                                         </div>
                                                     </div>
                                                     <div class="why-text">
-                                                        <a href="shopdetail/{{product.id}}"><h4>{{product.name}}</h4></a>
+                                                        <a href="shopdetail/{{product.id}}"><h4 class="name">{{product.name}}</h4></a>
                                                         <h5>${{product.price}}</h5>
                                                     </div>
                                                 </div>
@@ -89,7 +97,7 @@
     
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary">Add to cart</button>
+                                                                <button type="button" class="btn btn-primary AddtoCart" productid="{{product.id}}">Add to cart</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -111,13 +119,13 @@
                                                         <div class="mask-icon">
                                                             <ul>
                                                                 <li data-toggle="modal" data-target="#b{{product.id}}"><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist" productid="{{product.id}}" class="AddtoWishList"><i class="far fa-heart" ></i></a></li>
                                                             </ul>
-                                                            <a class="cart" href="#">Add to Cart</a>
+                                                            <a class="cart AddtoCart" productid="{{product.id}}">Add to Cart</a>
                                                         </div>
                                                     </div>
                                                     <div class="why-text">
-                                                        <a href="shopdetail/{{product.id}}"><h4>{{product.name}}</h4></a>
+                                                        <a href="shopdetail/{{product.id}}"><h4 class="name">{{product.name}}</h4></a>
                                                         <h5>${{product.price}}</h5>
                                                     </div>
                                                 </div>
@@ -163,13 +171,13 @@
                                                         <div class="mask-icon">
                                                             <ul>
                                                                 <li data-toggle="modal" data-target="#c{{product.id}}"><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"productid="{{product.id}}" class="AddtoWishList"><i class="far fa-heart"></i></a></li>
                                                             </ul>
-                                                            <a class="cart" href="#">Add to Cart</a>
+                                                            <a class="cart AddtoCart" productid="{{product.id}}">Add to Cart</a>
                                                         </div>
                                                     </div>
                                                     <div class="why-text">
-                                                        <a href="shopdetail/{{product.id}}"><h4>{{product.name}}</h4></a>
+                                                        <a href="shopdetail/{{product.id}}"><h4 class="name">{{product.name}}</h4></a>
                                                         <h5>${{product.price}}</h5>
                                                     </div>
                                                 </div>
@@ -209,11 +217,11 @@
                     <div class="product-categori">
                         <div class="search-product">
                             <form action="#">
-                                <input class="form-control" placeholder="Search here..." type="text">
+                                <input class="form-control search-input" placeholder="Search here..." type="text">
                                 <button type="submit"> <i class="fa fa-search"></i> </button>
                             </form>
                         </div>
-                        <div class="filter-sidebar-left">
+                        {% comment %} <div class="filter-sidebar-left">
                             <div class="title-left">
                                 <h3>Categories</h3>
                             </div>
@@ -259,15 +267,12 @@
                                     <button class="btn hvr-hover" type="submit">Filter</button>
                                 </p>
                             </div>
-                        </div>
+                        </div> {% endcomment %}
                     </div>
                 </div>
             </div>
             <nav aria-label="...">
                 <ul class="pagination">
-                    <li class="page-item">
-                        <div class="page-link" tabindex="-1">Previous</div>
-                    </li>
                 </ul>
             </nav>
         </div>
@@ -277,61 +282,82 @@
         var listItem = document.querySelectorAll(".tab-pane.fade.show.active .product_item");
         var perPage = 9;
         var page = 1;
-        var pages = Math.ceil(listItem.length/perPage);
         var paginations = document.querySelector('.pagination');
         
-        for(var i=0;i<pages;i++){
-            var number = document.createElement('li');
-            number.classList.add('page-item');
-            var numberDiv = document.createElement('div');
-            numberDiv.classList.add('page-link');
-            numberDiv.setAttribute('data-index',i);
-            var numberIn = document.createTextNode(i+1);
-            numberDiv.appendChild(numberIn);
-            number.appendChild(numberDiv);
-            number.addEventListener('click',function(e){
-                var self = e.target;
-                goToPage(self.getAttribute('data-index'));
+        function paginate(n){
+            pages = n;
+            while (paginations.firstChild) {
+                paginations.removeChild(paginations.firstChild);
+            }
+            var previous = document.createElement('li');
+            var aPrevious = document.createElement('div');
+            var textPrevious = document.createTextNode('Next');
+            previous.classList.add('page-item');
+            aPrevious.classList.add('page-link');
+            aPrevious.appendChild(textPrevious);
+            previous.appendChild(aPrevious);
+            previous.addEventListener('click',function(){
+                if(page>1){
+                    page--;
+                    Show();
+                }
             })
+            paginations.appendChild(previous);
 
-            paginations.appendChild(number);
+            for(var i=0;i<pages;i++){
+                var number = document.createElement('li');
+                number.classList.add('page-item');
+                var numberDiv = document.createElement('div');
+                numberDiv.classList.add('page-link');
+                numberDiv.setAttribute('data-index',i);
+                var numberIn = document.createTextNode(i+1);
+                numberDiv.appendChild(numberIn);
+                number.appendChild(numberDiv);
+                number.addEventListener('click',function(e){
+                    var self = e.target;
+                    goToPage(self.getAttribute('data-index'));
+                })
+
+                paginations.appendChild(number);
+            }
+
+            var next = document.createElement('li');
+            var aNext = document.createElement('div');
+            var textNext = document.createTextNode('Next');
+            next.classList.add('page-item');
+            aNext.classList.add('page-link');
+            aNext.appendChild(textNext);
+            next.appendChild(aNext);
+            next.addEventListener('click',function(){
+                if(page<pages){
+                    page++;
+                    Show();
+                }
+            })
+            paginations.appendChild(next);
         }
-        var previous = document.querySelector('.page-item');
-        previous.addEventListener('click',function(){
-            if(page>1){
-                page--;
-                Show();
-            }
-        })
-
-        var next = document.createElement('li');
-        var aNext = document.createElement('div');
-        var textNext = document.createTextNode('Next');
-        next.classList.add('page-item');
-        aNext.classList.add('page-link');
-        aNext.appendChild(textNext);
-        next.appendChild(aNext);
-        next.addEventListener('click',function(){
-            if(page<pages){
-                page++;
-                Show();
-            }
-        })
-        paginations.appendChild(next);
-
         function Show(){
             for(var i=0;i<listItem.length;i++){
                 listItem[i].classList.add('d-none');
+                if(listItem[i].querySelector('.name').innerText.toLowerCase().includes(search_value.toLowerCase())){
+                    listItem[i].classList.remove('d-none')
+                }
             }
+            var listShow = document.querySelectorAll(".tab-pane.fade.show.active .product_item:not(.d-none)");
+            var pages = Math.ceil(listShow.length/perPage);
+            paginate(pages);
             var offset = (page - 1)*perPage;
             var pagination = document.querySelectorAll('.page-item');
             for(var i=1;i<pagination.length-1;i++){
                 pagination[i].classList.remove('active');
             }
+            for(var i=0;i<listShow.length;i++){
+                listShow[i].classList.add('d-none');
+            }
             pagination[page].classList.add('active');
             for(var i=offset;i<offset+perPage;i++){
-                if(i>=listItem.length) break;
-                listItem[i].classList.remove('d-none');
+                if(i>=listShow.length) break;
+                listShow[i].classList.remove('d-none');
             }
         }
         function goToPage(index){
@@ -339,7 +365,6 @@
             page = index + 1;
             Show();
         }
-        Show();
         var choice = document.getElementById("sort");
         choice.onchange = function(){
             var value = choice.value;
@@ -355,5 +380,29 @@
             catch(e){
             }
         }
+        var search_value = "";
+        var input = document.querySelector('.search-input');
+        input.addEventListener('keyup', function(e){
+            search_value = e.target.value;
+            page = 1;
+            Show()
+        })
+        Show();
+        function load_js()
+    {
+        var head= $('#myscript');
+        var script= document.createElement('script');
+        script.src= '/static/webclient/js/ahihi.js';
+        head.html(script);
+    }
+    $.ajax({
+        type: "GET",
+        url: "/recommend",
+        data: {type:"user"},
+        success: function (response) {
+            $(".featured-products-box.owl-carousel.owl-theme").html(response);
+            load_js()
+        }
+    });
     </script>
 {% endblock content %}

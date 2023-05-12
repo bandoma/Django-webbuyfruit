@@ -16,10 +16,24 @@
             text-decoration: none;
             border-radius: 5px;
             margin-left: 10px;
-          }
+        }
           /* Set the background color of the body element */
     body {
     background-color: #f2f2f2;
+    }
+    .main{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 100vh;
+        width: 100vw;
+        {% comment %} background-image: url('/static/webclient/images/instagram-img-04.jpg'); {% endcomment %}
+        background-size: cover;
+        background-position: center;
     }
 
     /* Center the container element horizontally and vertically */
@@ -27,13 +41,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 50vh;
+    flex-direction: column;
+    width: 35%;
+    background: #c1c1c1;
+    border-radius: 5px;
     }
 
     /* Style the h1 element */
     h1 {
     font-size: 3em;
     margin-bottom: 30px;
+    color: red;
     }
 
     /* Style the label element */
@@ -69,38 +88,50 @@
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
-    margin-left: 10px;
+    margin-right: 10px;
+    }
+
+    .container form{
+        display: flex;
+        flex-direction: column;
     }
 
     /* Style the .container element for smaller screens */
     @media (max-width: 768px) {
     .container {
         flex-direction: column;
-        height: auto;
+        width: 100%;
+    }
+    h1 {
+        font-size: 2em;
     }
 }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>BÁO CÁO</h1>
-        
-        <form method="POST" action='report'>
-            {% csrf_token %}
-            <label>Bạn muốn báo cáo vấn đề gì</label>
-
-            <select name="message">
-                <option>Hàng quá ít</option>
-                <option>Hàng quá tệ</option>
-                <option>Vấn đề về hoàn tiền</option>
-                <option>Vấn đề về ship</option>
-            </select>
-            <input type="submit" value="Send!">
-            <a href="index" class="btn-back-to-home" style="margin-top: 50px; margin-left: 68px;">Back to Home</a>
-            <br>
-            <br>
-            {{thongbao}}
-        </form>
+    <div class="main">
+        <div class="container">
+            <h1>BÁO CÁO</h1>
+            
+            <form method="POST" action='report'>
+                {% csrf_token %}
+                <label style="margin-bottom: 30px;">Bạn muốn báo cáo vấn đề gì?</label>
+    
+                <div>
+                    <select name="message">
+                        <option>Hàng quá ít</option>
+                        <option>Hàng quá tệ</option>
+                        <option>Vấn đề về hoàn tiền</option>
+                        <option>Vấn đề về ship</option>
+                    </select>
+                    <input type="submit" value="Send!">
+                </div>
+                <a href="index" class="btn-back-to-home" style="text-align: center;">Back to Home</a>
+                <br>
+                <br>
+                <div style="text-align:center">{{thongbao}}</div>
+            </form>
+        </div>
     </div>
     
     <script src="script.js"></script>

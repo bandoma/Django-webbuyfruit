@@ -20,7 +20,7 @@ urlpatterns = [
     path('signout',views.SignOut),
     path('User',views.allUser),
     path('deleteUser',views.deleteUser),
-    path('piechart',views.pie_chart),
+    path('bieudoduong',views.bieudoduong),
     path('columnchart',views.column_chart),
     path('traloi',views.traloi),
     

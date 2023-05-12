@@ -1,6 +1,7 @@
 {% extends 'webclient/Base/Base.html' %}
 {% block content %}
 {% load static %}
+{%load tag %}
     <!-- Start All Title Box -->
     <div class="all-title-box">
         <div class="container">
@@ -43,7 +44,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="phone">Phone *</label>
-                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="" required>
+                                    <input type="text" class="form-control" id="phone" name="phone" placeholder=""pattern="[0-9]{10}"title="Chỉ được nhập số,phải nhập đủ 10 số">
                                     <div class="invalid-feedback"> Please enter your phone. </div>
                                 </div>
                                 
@@ -71,7 +72,7 @@
                                         {% for cart_product in cart_products %}
                                         <div class="media mb-2 border-bottom">
                                             <div class="media-body"> <a href="detail.html"> {{cart_product.product.name}}</a>
-                                                <div class="small text-muted">Price: ${{cart_product.product.price}} <span class="mx-2">|</span> Qty: {{cart_product.number}} <span class="mx-2">|</span> Subtotal: ${{cart_product.price}}</div>
+                                                <div class="small text-muted">Price: ${{cart_product.product.price}} <span class="mx-2">|</span> Qty: {{cart_product.number}} <span class="mx-2">|</span> Subtotal: ${{cart_product.product.price|nhan:cart_product.number}}</div>
                                                 <input name="product_id" value="{{cart_product.product.id}}" hidden>
                                                 <input name="number" value="{{cart_product.number}}" hidden>
                                             </div>

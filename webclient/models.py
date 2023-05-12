@@ -6,6 +6,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.core.validators import RegexValidator
 import datetime
 from product.models import Product
+import hashlib
 class user(models.Model):
     id = models.AutoField(primary_key=True)
     password = models.CharField(max_length=50)
@@ -17,6 +18,7 @@ class user(models.Model):
     phone_regex = RegexValidator(regex='\d*', message="Trường này chỉ dùng cho kiểu số.")
     phone = models.CharField(validators=[phone_regex],max_length=12)
     def CheckLogin(email: str, password: str):
+        password=hashlib.md5(str(password).strip().encode()).hexdigest()
         try:
             userr = user.objects.get(email=email, password=password)
         except:
@@ -26,6 +28,7 @@ class user(models.Model):
         if user.objects.filter(id=id).count()!=0:
             user.objects.filter(id=id).delete()
     def Add(username: str, email: str, password: str,birthday: datetime.datetime,fullname:str,Address:str,phone:str):
+        password=hashlib.md5(str(password).strip().encode()).hexdigest()
         userr = user(username=username, email=email, password=password,birthday=birthday,fullname=fullname,Address=Address,phone=phone)
         
         if user.objects.filter(email=email, password=password).exists():
@@ -128,7 +131,14 @@ class Order(models.Model):
     phone = models.CharField(validators=[RegexValidator(regex=r'^\d*$', message="Trường này chỉ dùng cho kiểu số.")],
                              max_length=12)
     show = models.BooleanField(default=True)
-
+    @property
+    def totalPrice(self):
+            price = [order_detail.price for order_detail in self.order_detail_set.all()]
+            if len(price) != 0:
+                price = sum(price)
+            else:
+                price = 0
+            return price
     def Add(ordering_account, name, address, phone, productids, amounts):
         order = Order()
         order.order_account = ordering_account

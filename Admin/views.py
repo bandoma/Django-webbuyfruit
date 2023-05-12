@@ -3,13 +3,14 @@ from django.http import HttpRequest, HttpResponseRedirect, JsonResponse, HttpRes
 from Admin.models import admin
 
 from product import models
-from webclient.models import user,Report
+from webclient.models import user,Report,Order
 from .models import traloiuser
 from product.models import Product
 import io
 import urllib, base64
 from django.shortcuts import render
 import datetime
+import time
 from django.http import HttpResponse
 # Create your views here.
 def index(request:HttpRequest):
@@ -79,14 +80,14 @@ def allProduct(request: HttpRequest):
 def allUser(request: HttpRequest):
     report=Report.objects.all()
     users=user.objects.all()
-    return render(request,"allUser.html",{"users":users,"reports": report,"user":users})
+    return render(request,"allUser.html",{"users":users,"ad" :getinfo(),"reports": report,"user":users})
 def deleteUser(request: HttpRequest):
     report=Report.objects.all()
     users=user.objects.all()
     if "Delete" in request.GET:
         id = request.GET["id"]
         user.Delete(id)
-    return render(request, "deleteUser.html",{"users":users,"reports": report,"user":users})
+    return render(request, "deleteUser.html",{"users":users,"ad" :getinfo(),"reports": report,"user":users})
     
 def addProduct(request: HttpRequest):
     report=Report.objects.all()
@@ -146,19 +147,28 @@ def getprofile(request: HttpRequest):
     users=user.objects.all()
     return render(request,"Base/BaseProfile.html",{"reports": report,"user":users,"ad" :getinfo()})
 
-def pie_chart(request: HttpRequest):
+def bieudoduong(request: HttpRequest):
     report=Report.objects.all()
     users=user.objects.all()
-    categories = models.Category.objects.all()
-    return render(request,"piechart.html",{"categories":categories,"reports": report,"user":users,"ad" :getinfo()})
+    
+    if "type" in request.GET:
+        orders=Order.objects.all()
+        
+        x=[int(time.mktime(order.time_checkout.timetuple())) for order in orders]
+        y=[order.totalPrice for order in orders]
+        return JsonResponse({"x":x,"y":y,"type":"line"})
+    orders=Order.objects.all()
+    x=[order.time_checkout.strftime("%d/%m/%Y  %H:%M:%S %p") for order in orders]
+    y=[order.totalPrice for order in orders]
+    return render(request,"bieudoduong.html",{"reports": report,"user":users,"ad" :getinfo(),"x":x,"y":y,"type":"line"})
+
 def column_chart(request: HttpRequest):
     products = models.Product.objects.all()
     report=Report.objects.all()
     users=user.objects.all()
     x=[product.name for product in products]
     y=[len(product.order_detail_set.all()) for product in products]
-    print(x)
-    return render(request,"columnchart.html",{"x":x,"y":y,"reports": report,"user":users})
+    return render(request,"columnchart.html",{"x":x,"y":y,"ad" :getinfo(),"reports": report,"user":users})
 def traloi(request: HttpRequest):
     if request.session.get("UserId"):
         if request.method=="POST":

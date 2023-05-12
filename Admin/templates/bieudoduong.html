@@ -1,0 +1,119 @@
+
+{% extends 'Base/Base.html' %}
+
+{% load tag %}
+{% block content %}
+<div class="title">Đánh giá doanh thu theo tháng </div>
+<div class="add-block funcblock">
+  <div class="row">
+    <div style="background: #fff; border-radius: 10px">
+      
+      <div class="col-lg-8 d-flex flex-column">
+        <canvas id="chart" style="width:100%;"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="view-block funcblock">
+    <div class="row">
+      <div style="background: #fff; border-radius: 10px">
+        <div class="part-title">Xem sản phẩm</div>
+        <div class="col-lg-12 d-flex flex-column">
+          <form class="form" action="allCategory">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Ngày</th>
+                    <th>Doanh thu ngày đó</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for days in x  %}
+                  <tr>
+                    <td>{{days}}</td>
+
+                    <td>{{y|don:forloop.counter0 }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% block scroll %}
+{% endblock scroll %}
+{% endblock content %}
+{% block scriptt %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.0.0/chartjs-plugin-zoom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-adapter-moment/1.0.0/chartjs-adapter-moment.min.js"></script>
+<script>
+function chartline(request, type) {
+    $.ajax({
+        type: "GET",
+        url: "/Admin/bieudoduong",
+        data: { type: type, request: request},
+        success: function(respone) {
+            datajson = respone;
+            let data = []
+            for (let index = 0; index < datajson.x.length; index++) {
+                data.push({x: new Date(datajson.x[index] * 1000),
+                           y: datajson.y[index]});
+            }
+            console.log(data)
+            var config = {
+
+                type: datajson.type,
+                data: {
+                datasets: [{
+                    label: "Số đơn",
+                    data: data,
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                }]
+                },
+                options: {
+                elements: {
+                    point: {
+                    pointStyle: 'circle',
+                    },
+                },
+                scales: {
+                    xAxes: [{
+                    type: 'time',
+                    time: {
+                        displayFormats: {
+                        'millisecond': 'MMM DD',
+                        'second': 'MMM DD',
+                        'minute': 'MMM DD',
+                        'hour': 'MMM DD',
+                        'day': 'MMM DD',
+                        'week': 'MMM DD',
+                        'month': 'MMM DD',
+                        'quarter': 'MMM DD',
+                        'year': 'MMM DD',
+                        }
+                    }
+                    }],
+                    yAxes: [{ticks: {min: 0}}],
+                },
+                }
+            };
+            
+            new Chart($("#chart").get(0).getContext("2d"), config);
+        }
+    })
+}
+
+</script>
+<script>
+chartline("ahihi","ahoho");
+</script>
+{% endblock scriptt %}

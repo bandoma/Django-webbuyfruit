@@ -59,7 +59,7 @@
                                 <div class="form-group row">
                                     <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
                                     <div class="col-md-8">
-                                        <input type="text" id="email_address" class="form-control" name="email">
+                                        <input type="text" id="email_address" class="form-control" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Phải nhập địa chỉ email hợp lệ">
                                     </div>
                                 </div>
 
@@ -73,7 +73,7 @@
                                 <div class="form-group row">
                                     <label for="phone_number" class="col-md-4 col-form-label text-md-right">PassWord</label>
                                     <div class="col-md-8">
-                                        <input type="password" id="password" class="form-control" name="password">
+                                        <input type="password" id="password" class="form-control" name="password" pattern="^(?=.*[A-Z])(?=.*\d).+$" title="Mật khẩu phải chứa ít nhất một chữ hoa và một số">
                                     </div>
                                 </div>
 
@@ -93,7 +93,7 @@
                                 <div class="form-group row">
                                     <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Phone</label>
                                     <div class="col-md-8">
-                                        <input type="text" id="number" class="form-control" name="phone">
+                                        <input type="text" id="number" class="form-control" name="phone" pattern="[0-9]{10}"title="Chỉ được nhập số,phải nhập đủ 10 số">
                                     </div>
                                 </div>
 

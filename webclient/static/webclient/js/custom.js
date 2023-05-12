@@ -8,7 +8,7 @@ $(".AddtoWishList").each(function (index, element) {
             data: { productid: id},
             success: function(respone) {
                 $("#notice-message").append(
-                    '<div style="width: 200px; cursor: pointer" onclick="this.remove()">'+respone+'</div>'
+                    '<div class="tb" style="width: 200px; cursor: pointer">'+respone+'</div>'
                 )
             }
         });
@@ -41,7 +41,7 @@ $(".AddtoCart").each(function (index, element) {
 			
             success: function(respone) {
                 $("#notice-message").append(
-                    '<div style="width: 200px; cursor: pointer" onclick="this.remove()">'+respone+'</div>'
+                    '<div class="tb" style="width: 200px; cursor: pointer">'+respone+'</div>'
                 )
             }
         });

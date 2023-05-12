@@ -1,6 +1,7 @@
 {% extends 'webclient/Base/Base.html' %}
 {% block content %}
     {% load static %}
+    {% load tag %}
     <!-- Start All Title Box -->
     <div class="all-title-box">
         <div class="container">
@@ -60,7 +61,7 @@
                                             onchange="this.parentNode.parentNode.children[4].children[0].innerHTML ='$ '+ this.value*{{cart_product.product.price}}">
                                         </td>
                                         <td class="total-pr">
-                                            <p>$ {{cart_product.product.price}}</p>
+                                            <p>$ {{cart_product.product.price|nhan:cart_product.number}}</p>
                                         </td>
                                         <td>
                                             <input name="productid_check" type="checkbox" value="{{cart_product.id}}" style="height: 20px; width: 20px;">
