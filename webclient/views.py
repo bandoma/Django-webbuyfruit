@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpRequest,HttpResponseRedirect,HttpResponse
 from product import models
-from .models import user,ForgetPassword,Report,Order,Payment,Wishlist
+from .models import user,ForgetPassword,Report,Order,Payment,Wishlist,Comment
 from product.models import Product
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
@@ -263,6 +263,8 @@ def shopdetail(request: HttpRequest,id):
         userrrr=user.objects.get(id=request.session.get("Userid"))
         cart_products = list(userrrr.cart.cart_product_many_many_set.all())
     productt = models.Product.objects.get(id=id)
+    if "ajax" in request.GET:
+        return render(request, "webclient/comment.html", {"product": productt})
     return render(request,"webclient/shop-detail.html",{'user': userrrr,"cart_products":cart_products,'product': productt})
 def report(request:HttpRequest):
     cart_products=None
@@ -276,8 +278,9 @@ def report(request:HttpRequest):
             dt = datetime.now()
             userr = user.objects.get(id=request.session.get("Userid"))
             Report.objects.create(message=message, datetime=dt,user=userr)
-        return render(request,"webclient/report.html",{"thongbao" : "admin đã nhận tin nhắn của bạn ","cart_products":cart_products,"user":userrrr })
-    return render(request,"webclient/report.html")
+            return render(request,"webclient/report.html",{"thongbao" : "admin đã nhận tin nhắn của bạn ","cart_products":cart_products,"user":userrrr })
+        return render(request,"webclient/report.html")
+    return HttpResponseRedirect("/Login")
 def admintraloi(request: HttpRequest):
     userrrr=user.objects.get(id=request.session.get("Userid"))
     traloi=traloiuser.objects.filter(user=userrrr)
@@ -359,6 +362,15 @@ def RecommendedSystem(request: HttpRequest):
             products = list(products)
         result = products
         return render(request, "webclient/Ajax/recomendProduct.html", {"products": result})
+def comment(request: HttpRequest):
+    
+    respone = "Bạn chưa đăng nhập"
+    if "Userid" in request.session:
+        productid = request.GET["productid"]
+        message = request.GET["message"]
+        userid = request.session["Userid"]
+        respone = Comment.Add(productid, message, userid)
+    return HttpResponse(respone)
         
 
 

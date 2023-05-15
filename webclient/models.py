@@ -195,4 +195,15 @@ class Wishlist(models.Model):
             wishlist.user = user
             wishlist.save(force_insert=True)
             return "Đã thêm yêu thích."
+class Comment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    message = models.CharField(max_length=1000)
+    user = models.ForeignKey(user, on_delete=models.CASCADE)
+    time = models.DateTimeField(auto_now=True)
+
+    def Add(productid : int, message : str, userid : int):
+        comment = Comment.objects.create(product=Product.objects.get(id=productid), 
+                               message=message, 
+                               user=user.objects.get(id=userid))
+        return "Bình luận thành công"
 

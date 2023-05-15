@@ -31,6 +31,7 @@ urlpatterns = [
     path('checkout',views.Checkout),
     path('admintraloi',views.admintraloi),
     path('recommend',views.RecommendedSystem),
+    path('comment',views.comment),
    
     
     

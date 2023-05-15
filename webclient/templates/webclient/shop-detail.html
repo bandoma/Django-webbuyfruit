@@ -91,7 +91,33 @@
             </div>
 			
 			<div class="row my-5">
-				
+				<div class="card card-outline-secondary my-4" style="width: 100%">
+					<div class="card-header">
+						<h2>Product Reviews</h2>
+					</div>
+					<div class="card-body">
+                        <div style="max-height: 400px; overflow-y: scroll;" id="block-comment">
+                            {% for comment in product.comment_set.all %}
+                            <div class="media mb-3">
+                                <div class="mr-2"> 
+                                </div>
+                                <div class="media-body">
+                                    <p>{{comment.message}}</p>
+                                    <small class="text-muted">Posted by {{user.username}} on {{comment.time}}</small>
+                                </div>
+                            </div>
+                            <hr>
+                            {% endfor %}
+                        </div>
+						<div class="media mb-3">
+							<div class="media-body">
+                                <h3>Bình luận: </h3>
+								<textarea style="width: 100%; display: block" id="message" productid="{{product.id}}" ></textarea>
+							</div>
+						</div>
+						<a class="btn" style="float: right; color:#000" id="SendComment">Gửi</a>
+					</div>
+				  </div>
 			</div>
 
             <div class="row my-5">
@@ -368,5 +394,19 @@ $.ajax({
     }
 });
 </script>  
+<script>
+    setInterval(getComment, 10000); 
+function getComment() {
+    productid = $("#message").attr("productid");
+    $.ajax({
+        type: "GET",
+        url: "/shopdetail/{{product.id}}",
+        data: {productid:productid, ajax:true},
+        success: function (response) {
+            $("#block-comment").html(response);
+        }
+    });
+}
+</script>
 {% endblock js %}
   

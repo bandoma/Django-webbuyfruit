@@ -24,6 +24,21 @@ $("li.side-menu > a").on("click", function() {
         }
     });
 })
+$("#SendComment").on("click", function() { 
+    productid = $("#message").attr("productid");
+    message = $("#message").val();
+    $.ajax({
+        type: "GET",
+        url: "/comment",
+        data: {productid:productid, message:message},
+        success: function (response) {
+            $("#notice-message").append(
+                '<div style="width: 200px; cursor: pointer" onclick="this.remove(); check();">'+response+'</div>'
+            );
+        }
+    });
+});
+
 $(".AddtoCart").each(function (index, element) {
     // element == this
     $(element).on("click", function() {
