@@ -199,11 +199,13 @@ class Comment(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     message = models.CharField(max_length=1000)
     user = models.ForeignKey(user, on_delete=models.CASCADE)
-    time = models.DateTimeField(auto_now=True)
+    time = models.DateTimeField()
 
     def Add(productid : int, message : str, userid : int):
         comment = Comment.objects.create(product=Product.objects.get(id=productid), 
                                message=message, 
-                               user=user.objects.get(id=userid))
+                               user=user.objects.get(id=userid),
+                               time=datetime.datetime.now()
+                               )
         return "Bình luận thành công"
 
