@@ -30765,5 +30765,9 @@ div.tagsinput span.tag a {
     display: none;
   }
 }
+.mybody
+{
+  background-image: url("/static/webclient/images/banner-01.jpg");
+}
 
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */

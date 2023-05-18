@@ -1,6 +1,10 @@
-from django.urls import include,path
+from django.urls import include,path,re_path
 from webclient import views
 from django.contrib.auth import views as auth_views
+# from django.conf.urls import url
+from django.conf import settings
+from django.views.static import serve
+
 urlpatterns = [
     path('index', views.index),
     path('',views.index),
@@ -32,6 +36,10 @@ urlpatterns = [
     path('admintraloi',views.admintraloi),
     path('recommend',views.RecommendedSystem),
     path('comment',views.comment),
+    re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+
+
    
     
     

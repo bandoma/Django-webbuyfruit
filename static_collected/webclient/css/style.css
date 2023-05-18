@@ -592,7 +592,6 @@
 }
  .arrow::before{
      font-family: 'FontAwesome';
-     content: "\f0d7";
      margin-left: 5px;
      margin-top: 2px;
      border: none;
@@ -1936,7 +1935,7 @@
      padding-left: 15px;
 }
  .toolbar-sorter-right .btn-light{
-     background: #000000;
+     background: #b0b435;
      color: #ffffff;
 }
  .toolbar-sorter-right .btn-light:hover{
@@ -2596,7 +2595,64 @@
 	font-weight: 700;
 	padding: 12px 25px;
 	border: none;
+    
 }
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+
+.thanhthuy{
+    margin: 0;
+    font-size: .9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #212529;
+    text-align: left;
+    background-color: #f5f8fa;
+    background-image: url("/static/webclient/images/banner-01.jpg");
+}
+.mybody{
+    background-image: url("/static/webclient/images/banner-01.jpg");
+}
+
+.navbar-laravel
+{
+    box-shadow: 0 2px 4px rgba(0,0,0,.04);
+}
+
+.navbar-brand , .nav-link, .my-form, .login-form
+{
+    font-family: Raleway, sans-serif;
+}
+
+.my-form
+{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.my-form .row
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.login-form
+{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.login-form .row
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-gap {
+    padding-top: 70px;
+}
+
+
+
 
 
 

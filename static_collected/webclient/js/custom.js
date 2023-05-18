@@ -1,3 +1,76 @@
+$(".AddtoWishList").each(function (index, element) {
+    // element == this
+    $(element).on("click", function() {
+        id = $(this).attr("productid");
+        $.ajax({
+            type: "GET",
+            url: "/AddtoWishList",
+            data: { productid: id},
+            success: function(respone) {
+                $("#notice-message").append(
+                    '<div class="tb" style="width: 200px; cursor: pointer">'+respone+'</div>'
+                )
+            }
+        });
+    })
+});
+$("li.side-menu > a").on("click", function() {
+    $.ajax({
+        type: "GET",
+        url: "/preCart",
+        data: {},
+        success: function(respone) {
+            $("body > div > header > nav > div.side > li > ul").html(respone);
+        }
+    });
+})
+$("#SendComment").on("click", function() { 
+    productid = $("#message").attr("productid");
+    message = $("#message").val();
+    $.ajax({
+        type: "GET",
+        url: "/comment",
+        data: {productid:productid, message:message},
+        success: function (response) {
+            $("#notice-message").append(
+                '<div style="width: 200px; cursor: pointer" onclick="this.remove(); check();">'+response+'</div>'
+            );
+        }
+    });
+});
+
+$(".AddtoCart").each(function (index, element) {
+    // element == this
+    $(element).on("click", function() {
+        id = $(this).attr("productid");
+		product_number= $("#product_number").val()
+		if (product_number==null) {
+				product_number=1;
+		}
+		
+		
+        $.ajax({
+            type: "GET",
+            url: "/AddtoCart",
+            data: { productid: id, number:product_number},
+			
+            success: function(respone) {
+                $("#notice-message").append(
+                    '<div class="tb" style="width: 200px; cursor: pointer">'+respone+'</div>'
+                )
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "/preCart",
+            data: {},
+            success: function(respone) {
+                $("body > div > header > nav > div.side > li > ul").html(respone);
+            }
+        });
+    })
+});
 (function($) {
     "use strict";
 	
@@ -211,6 +284,7 @@
 	$(".brand-box").niceScroll({
 		cursorcolor: "#9b9b9c",
 	});
+	
 	
 	
 }(jQuery));
