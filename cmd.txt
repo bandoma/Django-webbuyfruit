@@ -20,8 +20,6 @@ git commit -m "nội dung"
 git push -u origin master   
 
 AI
-Cosine similarity là một kỹ thuật tính toán độ tương đồng giữa hai véc-tơ dựa trên cosin của góc giữa chúng. 
-Nó thường được sử dụng trong lĩnh vực xử lý ngôn ngữ tự nhiên và khai phá dữ liệu.
 cosine similarity có thể được sử dụng trong các ứng dụng AI để tính toán độ tương đồng giữa các đối tượng hoặc để xử lý và phân tích dữ liệu. 
 duyệt từng đơn, duyệt từng thể loại
 nếu chung thể loại là +2 sold

@@ -57,6 +57,7 @@
                         <h2>{{product.name}}</h2>
                         <h5> <del>$ 60.00</del> ${{product.price}}</h5>
                         <p class="available-stock"><span> More than {{product.remain}} available / <a href="#">{{product.initAmount|sub:product.remain}} sold </a></span><p>
+                        <p> Thể loại: {{product.cate_id.name}}</p>
 						<h4>Short Description:</h4>
 						<p>{{product.description}} </p>
 						<ul>
