@@ -18,3 +18,18 @@ Github
 git add .
 git commit -m "nội dung"
 git push -u origin master   
+
+AI
+Cosine similarity là một kỹ thuật tính toán độ tương đồng giữa hai véc-tơ dựa trên cosin của góc giữa chúng. 
+Nó thường được sử dụng trong lĩnh vực xử lý ngôn ngữ tự nhiên và khai phá dữ liệu.
+cosine similarity có thể được sử dụng trong các ứng dụng AI để tính toán độ tương đồng giữa các đối tượng hoặc để xử lý và phân tích dữ liệu. 
+duyệt từng đơn, duyệt từng thể loại
+nếu chung thể loại là +2 sold
+do cái đang xem chưa có đơn nào hết, nên là không có các sản phẩm thường được đặt đi kèm để +sold nên là +0 sold
+trong đơn sẽ được +1 điểm ( ví dụ trong order detail)
+
+collectstatic:
+
+py manage.py collectstatic
+
+https://bestprogrammingblogs.blogspot.com/2021/03/django-static-files-not-working-when-debug-is-false.html?fbclid=IwAR1JAKRWAFICiJ3iyiJTXn1OiWzZc6Rj_0CFmqn_0Xsv4hzXVEVF7WLLYO4
