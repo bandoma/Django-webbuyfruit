@@ -154,8 +154,16 @@ def bieudoduong(request: HttpRequest):
     if "type" in request.GET:
         orders=Order.objects.all()
         
-        x=[int(time.mktime(order.time_checkout.timetuple())) for order in orders]
+        x=[int(time.mktime(order.time_checkout.date().timetuple())) for order in orders]
         y=[order.totalPrice for order in orders]
+        i = 0
+        while i != len(x)-1:
+            if x[i] == x[i+1]:
+                x.pop(i+1)
+                y[i] +=y[i+1]
+                y.pop(i+1)
+            else:
+                i+=1
         return JsonResponse({"x":x,"y":y,"type":"line"})
     orders=Order.objects.all()
     x=[order.time_checkout.strftime("%d/%m/%Y  %H:%M:%S %p") for order in orders]
@@ -167,7 +175,13 @@ def column_chart(request: HttpRequest):
     report=Report.objects.all()
     users=user.objects.all()
     x=[product.name for product in products]
-    y=[len(product.order_detail_set.all()) for product in products]
+    y = []
+    for product in products:
+        temp=product.order_detail_set.all()
+        summ = 0
+        for orderr in temp:
+            summ += orderr.number
+        y.append(summ)
     return render(request,"columnchart.html",{"x":x,"y":y,"ad" :getinfo(),"reports": report,"user":users})
 def traloi(request: HttpRequest):
     if request.session.get("UserId"):
