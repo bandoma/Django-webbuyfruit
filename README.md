@@ -1,5 +1,3 @@
 # Django-webbuyfruit
-Web của tôi có những chức năng cơ bản của một web bình thường:
-cách chạy django:
-Cài đặt Django
- các bạn lên youtube xem nha :), còn các chức năng của web mình có thể ở documents
+My website has the basic functions of a normal website:
+How to run django,Install Django, You can go to YouTube to watch it, but the functions of our website can be found in documents
